@@ -1,42 +1,23 @@
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.scss';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { useSelector, useDispatch } from 'react-redux';
+// Layout
+import Layout from '@/layout/Layout';
 
-import type { RootState } from './store';
-import { increment, incrementBy } from './store/counter.store';
+// Pages
+import Home from '@/pages/Home';
+import Register from '@/pages/Register';
 
-function App() {
-  const count = useSelector((state: RootState) => state.counter.count);
-  const dispatch = useDispatch();
+const App = () => {
   return (
-    <>
-      <div>
-        <a href='https://vitejs.dev' target='_blank'>
-          <img src={viteLogo} className='logo' alt='Vite logo' />
-        </a>
-        <a href='https://react.dev' target='_blank'>
-          <img src={reactLogo} className='logo react' alt='React logo' />
-        </a>
-      </div>
-      <h1>Vite + React + Redux</h1>
-      <div className='card'>
-        <button onClick={() => dispatch(increment())}>
-          count is {count}
-        </button>
-        <button onClick={() => dispatch(incrementBy(5))}>
-          Increment by 5
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Register />} />
+        <Route element={<Layout />}>
+          <Route path='/home' element={<Home />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
