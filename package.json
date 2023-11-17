@@ -17,6 +17,7 @@
     "react-router-dom": "^6.19.0"
   },
   "devDependencies": {
+    "@iconify/react": "^4.1.1",
     "@types/node": "^20.9.0",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
