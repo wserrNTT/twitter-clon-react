@@ -1,4 +1,8 @@
 export interface IUser {
-  username: string;
+  data: {
+    username: string;
+    displayname: string;
+    profilePicture: string;
+  } | null;
   isLoggedIn: boolean;
 }

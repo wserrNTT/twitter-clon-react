@@ -1,0 +1,151 @@
+.layout-container {
+  color: #e7e9ea;
+  display: grid;
+  grid-template-columns: 315px auto;
+  height: 100vh;
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-right: 1px solid #454545;
+    padding-left: 50px;
+
+    .item-list {
+      font-size: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      list-style: none;
+
+      .item {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        column-gap: 15px;
+        padding: 8px 20px 8px 14px;
+        border-radius: 64px;
+        text-decoration: none;
+        color: #e7e9ea;
+        cursor: pointer;
+        transition: background-color ease-in 0.2s;
+
+        &:hover {
+          background-color: #313131;
+        }
+
+        .icon {
+          font-size: 2.8rem;
+        }
+      }
+
+      .home {
+        margin-bottom: 10px;
+        font-size: 2.5rem;
+        padding: 10px;
+      }
+
+      .item-post {
+        margin-top: 10px;
+        align-self: stretch;
+        background-color: #1d9bf0;
+
+        .icon {
+          display: none;
+        }
+
+        .text {
+          font-weight: bold;
+          margin: auto;
+        }
+
+        &:hover {
+          background-color: #1b8bd6;
+        }
+      }
+    }
+
+    .user {
+      display: flex;
+      align-items: center;
+      align-self: stretch;
+      column-gap: 10px;
+      margin-top: auto;
+      padding: 8px 10px;
+      font-size: 1.5rem;
+      border-radius: 32px;
+      cursor: pointer;
+
+      .user-pfp {
+        height: 40px;
+        border-radius: 50%;
+      }
+
+      .user-info {
+        display: flex;
+        flex-direction: column;
+
+        .display-name {
+          font-weight: bold;
+        }
+      }
+
+      .icon {
+        margin-left: auto;
+        font-size: 2rem;
+      }
+
+      &:hover {
+        background-color: #313131;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .layout-container {
+    grid-template-columns: 90px auto;
+
+    .sidebar {
+      padding: 10px 5px;
+
+      .item-list {
+        align-items: center;
+
+        .item {
+          padding: 10px;
+
+          .text {
+            display: none;
+          }
+        }
+
+        .item-post {
+          align-self: center;
+          width: 50px;
+          height: 50px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 3rem;
+
+          .icon {
+            display: block;
+          }
+        }
+      }
+
+      .user {
+        align-self: center;
+
+        .user-info {
+          display: none;
+        }
+
+        .icon {
+          display: none;
+        }
+      }
+    }
+  }
+}

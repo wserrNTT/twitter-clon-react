@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleLogin } from '@/store/user.store';
+import { login } from '@/store/user.store';
 import type { RootState } from '@/store';
 
 // React-router
@@ -28,6 +28,17 @@ const Register: FC = () => {
   useEffect(() => {
     if (isLoggenIn) navigate('/home');
   }, [isLoggenIn]);
+
+  const handleLogin = () => {
+    dispatch(
+      login({
+        username: 'user123',
+        displayname: 'user',
+        profilePicture:
+          'https://as1.ftcdn.net/v2/jpg/03/39/45/96/1000_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpg'
+      })
+    );
+  };
   return (
     <div className='register-container'>
       <div className='x-container'>
@@ -75,9 +86,7 @@ const Register: FC = () => {
           <button
             type='button'
             className='login-button'
-            onClick={() => {
-              dispatch(toggleLogin());
-            }}
+            onClick={handleLogin}
           >
             Iniciar sesión
           </button>
