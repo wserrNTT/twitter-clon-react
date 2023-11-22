@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '@/store/user.store';
+import { login } from '@/store/login.store';
 import type { RootState } from '@/store';
 
 // React-router
@@ -20,14 +20,14 @@ import type { FC } from 'react';
 
 const Register: FC = () => {
   const isLoggenIn = useSelector(
-    (state: RootState) => state.user.isLoggedIn
+    (state: RootState) => state.login.isLoggedIn
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (isLoggenIn) navigate('/home');
-  }, [isLoggenIn]);
+  }, [isLoggenIn, navigate]);
 
   const handleLogin = () => {
     dispatch(
@@ -35,7 +35,9 @@ const Register: FC = () => {
         username: 'user123',
         displayname: 'user',
         profilePicture:
-          'https://as1.ftcdn.net/v2/jpg/03/39/45/96/1000_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpg'
+          'https://as1.ftcdn.net/v2/jpg/03/39/45/96/1000_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpg',
+        following: 625,
+        followers: 23
       })
     );
   };

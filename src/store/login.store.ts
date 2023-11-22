@@ -2,31 +2,20 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 // Types
-import type { IUser } from '@/common/types';
+import type { ILogin, IUser } from '@/common/types';
 
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    data: {
-      username: '',
-      displayname: '',
-      profilePicture: ''
-    },
+    data: null,
     isLoggedIn: false
-  } as IUser,
+  } as ILogin,
   reducers: {
-    login: (
-      state: IUser,
-      action: PayloadAction<{
-        username: string;
-        displayname: string;
-        profilePicture: string;
-      }>
-    ) => {
+    login: (state: ILogin, action: PayloadAction<IUser>) => {
       state.data = action.payload;
       state.isLoggedIn = true;
     },
-    logout: (state: IUser) => {
+    logout: (state: ILogin) => {
       state.isLoggedIn = false;
       state.data = null;
     }

@@ -1,0 +1,140 @@
+{
+  "users": [
+    {
+      "username": "goldenrabbit802",
+      "displayname": "Andy Dunn",
+      "profilePicture": "https://randomuser.me/api/portraits/med/men/29.jpg",
+      "following": 931,
+      "followers": 5676,
+      "isFollowing": false
+    },
+    {
+      "username": "sadtiger579",
+      "displayname": "Akhil Mardhekar",
+      "profilePicture": "https://randomuser.me/api/portraits/med/men/84.jpg",
+      "following": 9784,
+      "followers": 10042,
+      "isFollowing": false
+    },
+    {
+      "username": "angryelephant534",
+      "displayname": "Vito Roux",
+      "profilePicture": "https://randomuser.me/api/portraits/med/men/45.jpg",
+      "following": 1805,
+      "followers": 6115,
+      "isFollowing": false
+    },
+    {
+      "username": "browncat991",
+      "displayname": "Stacy Hernandez",
+      "profilePicture": "https://randomuser.me/api/portraits/med/women/15.jpg",
+      "following": 348,
+      "followers": 8131,
+      "isFollowing": false
+    },
+    {
+      "username": "redbird773",
+      "displayname": "Aubrey Mitchell",
+      "profilePicture": "https://randomuser.me/api/portraits/med/women/61.jpg",
+      "following": 5605,
+      "followers": 2249,
+      "isFollowing": false
+    },
+    {
+      "username": "ticklishgoose546",
+      "displayname": "Syuzanna Fisun",
+      "profilePicture": "https://randomuser.me/api/portraits/med/women/0.jpg",
+      "following": 2210,
+      "followers": 8979,
+      "isFollowing": false
+    },
+    {
+      "username": "redpeacock793",
+      "displayname": "Noam Marchand",
+      "profilePicture": "https://randomuser.me/api/portraits/med/men/10.jpg",
+      "following": 1578,
+      "followers": 8470,
+      "isFollowing": false
+    },
+    {
+      "username": "ticklishmouse134",
+      "displayname": "Krasnovida Bocyurko",
+      "profilePicture": "https://randomuser.me/api/portraits/med/women/41.jpg",
+      "following": 5612,
+      "followers": 7975,
+      "isFollowing": false
+    },
+    {
+      "username": "goldenmouse412",
+      "displayname": "Francisco Velasco",
+      "profilePicture": "https://randomuser.me/api/portraits/med/men/39.jpg",
+      "following": 5941,
+      "followers": 9140,
+      "isFollowing": false
+    },
+    {
+      "username": "blueostrich374",
+      "displayname": "Isobel Walker",
+      "profilePicture": "https://randomuser.me/api/portraits/med/women/20.jpg",
+      "following": 1974,
+      "followers": 8789,
+      "isFollowing": false
+    },
+    {
+      "username": "sadtiger999",
+      "displayname": "Kelly Baker",
+      "profilePicture": "https://randomuser.me/api/portraits/med/women/88.jpg",
+      "following": 7203,
+      "followers": 9337,
+      "isFollowing": false
+    },
+    {
+      "username": "whitepeacock756",
+      "displayname": "Anirudh Banerjee",
+      "profilePicture": "https://randomuser.me/api/portraits/med/men/7.jpg",
+      "following": 1961,
+      "followers": 8909,
+      "isFollowing": false
+    },
+    {
+      "username": "whiteostrich329",
+      "displayname": "Jasmine Edwards",
+      "profilePicture": "https://randomuser.me/api/portraits/med/women/46.jpg",
+      "following": 6874,
+      "followers": 4973,
+      "isFollowing": false
+    },
+    {
+      "username": "happygoose793",
+      "displayname": "Hunter Sirko",
+      "profilePicture": "https://randomuser.me/api/portraits/med/men/35.jpg",
+      "following": 1101,
+      "followers": 8874,
+      "isFollowing": false
+    },
+    {
+      "username": "angryrabbit391",
+      "displayname": "Lea Clark",
+      "profilePicture": "https://randomuser.me/api/portraits/med/women/20.jpg",
+      "following": 826,
+      "followers": 8604,
+      "isFollowing": false
+    },
+    {
+      "username": "goldenwolf317",
+      "displayname": "Gül Erbay",
+      "profilePicture": "https://randomuser.me/api/portraits/med/women/82.jpg",
+      "following": 5130,
+      "followers": 4582,
+      "isFollowing": false
+    },
+    {
+      "username": "lazygorilla369",
+      "displayname": "Dennis Mitchell",
+      "profilePicture": "https://randomuser.me/api/portraits/med/men/13.jpg",
+      "following": 6450,
+      "followers": 1531,
+      "isFollowing": false
+    }
+  ]
+}

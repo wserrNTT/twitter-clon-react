@@ -1,9 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userStore from '@/store/user.store';
+
+import loginStore from '@/store/login.store';
+import sampleStore from '@/store/sample.store';
 
 export const store = configureStore({
   reducer: {
-    user: userStore
+    login: loginStore,
+    samples: sampleStore
   }
 });
 
