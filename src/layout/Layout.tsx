@@ -27,6 +27,7 @@ const Layout: FC = () => {
   const randomUsers = useSelector(selectRandomUsers);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [itemIndex, setItemIndex] = useState<number>(0);
 
   useEffect(() => {
@@ -53,7 +54,7 @@ const Layout: FC = () => {
                   : 'material-symbols:home-outline'
               }
             />
-            <p className='text'>Inicio</p>
+            <p className={`text ${itemIndex === 0 && 'bold'}`}>Inicio</p>
           </Link>
           <Link
             to='/explore'
@@ -68,7 +69,7 @@ const Layout: FC = () => {
                   : 'iconamoon:search'
               }
             />
-            <p className='text'>Explorar</p>
+            <p className={`text ${itemIndex === 1 && 'bold'}`}>Explorar</p>
           </Link>
           <Link
             to='/notifications'
@@ -79,7 +80,9 @@ const Layout: FC = () => {
               className='icon'
               icon={itemIndex === 2 ? 'ph:bell-fill' : 'ph:bell-light'}
             />
-            <p className='text'>Notificaciones</p>
+            <p className={`text ${itemIndex === 2 && 'bold'}`}>
+              Notificaciones
+            </p>
           </Link>
           <Link
             to='/messages'
@@ -94,7 +97,7 @@ const Layout: FC = () => {
                   : 'teenyicons:envelope-outline'
               }
             />
-            <p className='text'>Mensajes</p>
+            <p className={`text ${itemIndex === 3 && 'bold'}`}>Mensajes</p>
           </Link>
           <Link
             to={`/${userData?.username}/lists`}
@@ -109,7 +112,7 @@ const Layout: FC = () => {
                   : 'fluent:document-one-page-24-regular'
               }
             />
-            <p className='text'>Listas</p>
+            <p className={`text ${itemIndex === 4 && 'bold'}`}>Listas</p>
           </Link>
           <div className='item'>
             <Icon className='icon' icon='simple-icons:x' />
@@ -126,7 +129,7 @@ const Layout: FC = () => {
                 itemIndex === 5 ? 'heroicons:user-solid' : 'heroicons:user'
               }
             />
-            <p className='text'>Perfil</p>
+            <p className={`text ${itemIndex === 5 && 'bold'}`}>Perfil</p>
           </Link>
           <div className='item'>
             <Icon className='icon' icon='tabler:dots-circle-horizontal' />
@@ -151,89 +154,108 @@ const Layout: FC = () => {
         </div>
       </aside>
       <Outlet />
-      <aside className='right-sidebar'>
-        <div className='sidebar-item search'>
-          <Icon className='icon' icon='iconamoon:search' />
-          <input
-            className='input-search'
-            type='text'
-            placeholder='Buscar'
-          />
-        </div>
-        <div className='sidebar-item premium'>
-          <p className='title'>Suscríbete a Premium</p>
-          <p className='body'>
-            Suscríbete para desbloquear nuevas funciones y, si eres
-            elegible, recibir un pago de cuota de ingresos por anuncios.
-          </p>
-          <button type='button' className='subscribe-button'>
-            Suscribirse
-          </button>
-        </div>
-        <div className='sidebar-item trends'>
-          <p className='title'>Tendencias para ti</p>
-
-          {randomTrends.map((trend) => (
-            <div className='trend' key={trend.name}>
-              <div className='info'>
-                <p className='header'>Tendencia</p>
-                <p className='name'>{trend.name}</p>
-                <p className='volume' v-if='trend.tweet_volume'>
-                  {trend.tweet_volume} posts
-                </p>
-              </div>
-              <div className='options'>
-                <Icon icon='mi:options-horizontal' className='icon' />
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className='sidebar-item follow'>
-          <p className='title'>A quién seguir</p>
-          {randomUsers.map((user) => (
-            <div className='user' key={user.username}>
-              <img
-                className='profile-picture'
-                src={user.profilePicture}
-                alt={user.displayname}
+      {itemIndex !== 3 && (
+        // Prevent rendering on Messages
+        <aside className='right-sidebar'>
+          <div className='search-container'>
+            <div className='search'>
+              <Icon className='icon' icon='iconamoon:search' />
+              <input
+                className='input-search'
+                type='text'
+                placeholder='Buscar'
               />
-              <div className='info'>
-                <p className='display-name'>{user.displayname}</p>
-                <p className='user-name'>@{user.username}</p>
-              </div>
-              <button className='follow-button'>Seguir</button>
             </div>
-          ))}
-        </div>
-        <div className='sidebar-item footer'>
-          <a className='link' href='https://twitter.com/tos'>
-            Condiciones de Servicio
-          </a>
-          <a className='link' href='https://twitter.com/privacy'>
-            Política de Privacidad
-          </a>
-          <a
-            className='link'
-            href='https://support.twitter.com/articles/20170514'
-          >
-            Política de cookies
-          </a>
-          <a
-            className='link'
-            href='https://help.twitter.com/resources/accessibility'
-          >
-            Accesibilidad
-          </a>
-          <a
-            className='link'
-            href='https://business.twitter.com/en/help/troubleshooting/how-twitter-ads-work.html?ref=web-twc-ao-gbl-adsinfo&utm_source=twc&utm_medium=web&utm_campaign=ao&utm_content=adsinfo'
-          >
-            Información de anuncios
-          </a>
-          <span className='link'>Más opciones...</span>
-          <span className='link'>© 2023 X Corp.</span>
-        </div>
-      </aside>
+          </div>
+          <div className='sidebar-items'>
+            {itemIndex === 0 && (
+              <div className='premium'>
+                <p className='title'>Suscríbete a Premium</p>
+                <p className='body'>
+                  Suscríbete para desbloquear nuevas funciones y, si eres
+                  elegible, recibir un pago de cuota de ingresos por
+                  anuncios.
+                </p>
+                <button type='button' className='subscribe-button'>
+                  Suscribirse
+                </button>
+              </div>
+            )}
+            {[0, 2, 4, 5].includes(itemIndex) && (
+              <div className='trends'>
+                <p className='title'>Tendencias para ti</p>
+
+                {randomTrends.map((trend) => (
+                  <div className='trend' key={trend.name}>
+                    <div className='info'>
+                      <p className='header'>Tendencia</p>
+                      <p className='name'>{trend.name}</p>
+                      <p className='volume' v-if='trend.tweet_volume'>
+                        {trend.tweet_volume} posts
+                      </p>
+                    </div>
+                    <div className='options'>
+                      <Icon
+                        icon='mi:options-horizontal'
+                        className='icon'
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {[0, 1, 2, 4, 5].includes(itemIndex) && (
+              <div className='follow'>
+                <p className='title'>
+                  {itemIndex === 5 ? 'Tal vez te guste' : 'A quién seguir'}
+                </p>
+                {randomUsers.map((user) => (
+                  <div className='user' key={user.username}>
+                    <img
+                      className='profile-picture'
+                      src={user.profilePicture}
+                      alt={user.displayname}
+                    />
+                    <div className='info'>
+                      <p className='display-name'>{user.displayname}</p>
+                      <p className='user-name'>@{user.username}</p>
+                    </div>
+                    <button className='follow-button'>Seguir</button>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className='footer'>
+              <a className='link' href='https://twitter.com/tos'>
+                Condiciones de Servicio
+              </a>
+              <a className='link' href='https://twitter.com/privacy'>
+                Política de Privacidad
+              </a>
+              <a
+                className='link'
+                href='https://support.twitter.com/articles/20170514'
+              >
+                Política de cookies
+              </a>
+              <a
+                className='link'
+                href='https://help.twitter.com/resources/accessibility'
+              >
+                Accesibilidad
+              </a>
+              <a
+                className='link'
+                href='https://business.twitter.com/en/help/troubleshooting/how-twitter-ads-work.html?ref=web-twc-ao-gbl-adsinfo&utm_source=twc&utm_medium=web&utm_campaign=ao&utm_content=adsinfo'
+              >
+                Información de anuncios
+              </a>
+              <span className='link'>Más opciones...</span>
+              <span className='link'>© 2023 X Corp.</span>
+            </div>
+          </div>
+        </aside>
+      )}
     </div>
   );
 };
