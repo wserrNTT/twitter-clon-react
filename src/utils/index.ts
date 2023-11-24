@@ -7,3 +7,6 @@ export const shuffleArray = <T>(array: T[]) => {
   }
   return arr;
 };
+
+export const updateDocumentTitle = (newTitle: string) =>
+  (document.title = newTitle);

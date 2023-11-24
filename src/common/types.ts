@@ -17,3 +17,7 @@ export interface ITrend {
   url: string;
   tweet_volume: number | null;
 }
+
+export interface pageProps {
+  title: string;
+}

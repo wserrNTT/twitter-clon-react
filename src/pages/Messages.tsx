@@ -1,6 +1,17 @@
-import { FC } from 'react';
+// React
+import { useEffect } from 'react';
 
-const Messages: FC = () => {
+// Utils
+import { updateDocumentTitle } from '@/utils';
+
+// Types
+import type { FC } from 'react';
+import type { pageProps } from '@/common/types';
+
+const Messages: FC<pageProps> = ({ title }) => {
+  useEffect(() => {
+    updateDocumentTitle(title);
+  });
   return <div>Messages</div>;
 };
 

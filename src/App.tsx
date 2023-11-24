@@ -16,12 +16,24 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Register />} />
+        <Route
+          path='/'
+          element={<Register title='X. Es lo que está pasando /X' />}
+        />
         <Route element={<Layout />}>
-          <Route path='/home' element={<Home />} />
-          <Route path='/explore' element={<Explore />} />
-          <Route path='/notifications' element={<Notifications />} />
-          <Route path='/messages' element={<Messages />} />
+          <Route path='/home' element={<Home title='Inicio /X' />} />
+          <Route
+            path='/explore'
+            element={<Explore title='Explorar /X' />}
+          />
+          <Route
+            path='/notifications'
+            element={<Notifications title='Notificaciones /X' />}
+          />
+          <Route
+            path='/messages'
+            element={<Messages title='Mensajes /X' />}
+          />
           <Route path='/:id' element={<Profile />} />
           <Route path='/:id/lists' element={<Lists />} />
         </Route>

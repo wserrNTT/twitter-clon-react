@@ -12,13 +12,17 @@ import { useNavigate } from 'react-router-dom';
 // Components
 import { Icon } from '@iconify/react';
 
-// Styles
-import '@/assets/Register.scss';
+// Utils
+import { updateDocumentTitle } from '@/utils';
 
 // Types
 import type { FC } from 'react';
+import type { pageProps } from '@/common/types';
 
-const Register: FC = () => {
+// Styles
+import '@/assets/Register.scss';
+
+const Register: FC<pageProps> = ({title}) => {
   const isLoggenIn = useSelector(
     (state: RootState) => state.login.isLoggedIn
   );
@@ -28,7 +32,9 @@ const Register: FC = () => {
   useEffect(() => {
     if (isLoggenIn) navigate('/home');
   }, [isLoggenIn, navigate]);
-
+  useEffect(() => {
+    updateDocumentTitle(title);
+  });
   const handleLogin = () => {
     dispatch(
       login({

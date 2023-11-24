@@ -1,12 +1,19 @@
 // React
-import { FC } from 'react';
+import { useEffect, FC } from 'react';
 
-// Router
-import { useParams } from 'react-router-dom';
+// Redux
+import { useSelector } from 'react-redux';
+import type { RootState } from '@/store';
+
+// Utils
+import { updateDocumentTitle } from '@/utils';
 
 const Lists: FC = () => {
-  const { id } = useParams();
-  return <div>{id}'s lists</div>;
+  const userData = useSelector((state: RootState) => state.login.data);
+  useEffect(() => {
+    updateDocumentTitle(`Listas creadas por ${userData?.username} /X`);
+  });
+  return <div>{userData?.displayname}'s lists</div>;
 };
 
 export default Lists;

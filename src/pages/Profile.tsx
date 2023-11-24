@@ -1,12 +1,24 @@
 // React
-import { FC } from 'react';
+import { useEffect } from 'react';
 
-// Router
-import { useParams } from 'react-router-dom';
+// Redux
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
+
+// Utils
+import { updateDocumentTitle } from '@/utils';
+
+// Types
+import type { FC } from 'react';
 
 const Profile: FC = () => {
-  const { id } = useParams();
-  return <div>{id}'s Profile</div>;
+  const userData = useSelector((state: RootState) => state.login?.data);
+  useEffect(() => {
+    updateDocumentTitle(
+      `${userData?.displayname} (@${userData?.username}) /X`
+    );
+  });
+  return <div>{userData?.displayname}'s Profile</div>;
 };
 
 export default Profile;
