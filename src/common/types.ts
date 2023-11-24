@@ -1,3 +1,5 @@
+import type { Dispatch, SetStateAction } from 'react';
+
 export interface ILogin {
   data: IUser | null;
   isLoggedIn: boolean;
@@ -20,4 +22,7 @@ export interface ITrend {
 
 export interface pageProps {
   title: string;
+}
+export interface modalProps {
+  setShow: Dispatch<SetStateAction<boolean>>;
 }
