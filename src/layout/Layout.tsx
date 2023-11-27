@@ -2,8 +2,7 @@
 import { FC, useEffect, useState } from 'react';
 
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '@/store/login.store';
+import { useSelector } from 'react-redux';
 import type { RootState } from '@/store';
 import {
   selectRandomTrends,
@@ -25,11 +24,10 @@ const Layout: FC = () => {
   const userData = useSelector((state: RootState) => state.login.data);
   const randomTrends = useSelector(selectRandomTrends);
   const randomUsers = useSelector(selectRandomUsers);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [itemIndex, setItemIndex] = useState<number>(0);
-
+  const [showMenu, setShowMenu] = useState(false);
   useEffect(() => {
     if (!isLoggenIn) navigate('/');
   }, [isLoggenIn, navigate]);
@@ -140,7 +138,10 @@ const Layout: FC = () => {
             <p className='text'>Postear</p>
           </div>
         </div>
-        <div className='user' onClick={() => dispatch(logout())}>
+        <div
+          className={`user ${!showMenu && 'hover'}`}
+          onClick={() => setShowMenu(true)}
+        >
           <img
             src={userData?.profilePicture}
             alt=''
@@ -151,11 +152,21 @@ const Layout: FC = () => {
             <span className='user-name'>@{userData?.username}</span>
           </div>
           <Icon icon='mi:options-horizontal' className='icon' />
+          {showMenu && (
+            <div className='submenu'>
+              <div className='items'>
+                <p className='item'>Agregar una cuenta existente</p>
+                <p className='item' onClick={() => navigate('/logout')}>
+                  Cerrar la sesión de @{userData?.username}
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </aside>
       <Outlet />
       {itemIndex !== 3 && (
-        // Prevent rendering on Messages
+        // Prevent rendering on Messages Page
         <aside className='right-sidebar'>
           <div className='search-container'>
             <div className='search'>
@@ -255,6 +266,12 @@ const Layout: FC = () => {
             </div>
           </div>
         </aside>
+      )}
+      {showMenu && (
+        <div
+          className='background'
+          onClick={() => setShowMenu(false)}
+        ></div>
       )}
     </div>
   );

@@ -11,6 +11,7 @@ import Notifications from '@/pages/Notifications';
 import Messages from '@/pages/Messages';
 import Profile from '@/pages/Profile';
 import Lists from '@/pages/Lists';
+import Logout from '@/pages/Logout';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           path='/'
           element={<Register title='X. Es lo que está pasando /X' />}
         />
+        <Route path='/logout' element={<Logout title="X"/>} />
         <Route element={<Layout />}>
           <Route path='/home' element={<Home title='Inicio /X' />} />
           <Route
