@@ -1,0 +1,136 @@
+$blueTwitter: #1b8bd6;
+$darkBlueTwitter: #1685cf;
+
+$lightGrey: #71767b;
+$grey: #313131;
+$darkGrey: #16181c;
+$white: #e7e9ea;
+
+.home-container {
+  .tabs {
+    position: sticky;
+    top: 0;
+    display: flex;
+    height: 52px;
+    border-bottom: solid 1px $grey;
+    overflow: hidden;
+
+    .tab {
+      flex: auto;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      .text {
+        position: relative;
+        padding: 0 5px;
+        display: flex;
+        align-items: center;
+        font-size: 1.6rem;
+        font-weight: bold;
+      }
+
+      &-active {
+        .text::after {
+          content: '';
+          position: absolute;
+          height: 4px;
+          width: 100%;
+          bottom: 0;
+          left: 0;
+          border-radius: 4px;
+          background-color: $blueTwitter;
+        }
+      }
+
+      &:hover {
+        background-color: $grey;
+      }
+    }
+
+    .settings {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      width: 60px;
+
+      .icon {
+        padding: 7.5px;
+        box-sizing: content-box;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $grey;
+        }
+      }
+    }
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 100%;
+      background-color: rgba(black, 0.8);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      z-index: 0;
+    }
+  }
+
+  .post-container {
+    display: flex;
+    border-bottom: solid 1px $grey;
+    padding: 15px;
+
+    .profile-container {
+      padding-right: 10px;
+
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+    }
+
+    .input-container {
+      flex: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .new-tweet {
+        padding-top: 5px;
+        background-color: transparent;
+        border: none;
+        font-size: 2rem;
+        outline: none;
+        color: $lightGrey;
+      }
+
+      .options {
+        display: flex;
+
+        .post-button {
+          margin-left: auto;
+          background-color: $blueTwitter;
+          padding: 10px 20px;
+          font-size: 1.5rem;
+          color: $white;
+          font-weight: bold;
+          border: none;
+          border-radius: 32px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $darkBlueTwitter;
+            transform: background-color ease-in 0.3s;
+          }
+        }
+      }
+    }
+  }
+}
