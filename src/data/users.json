@@ -1,7 +1,9 @@
 {
   "users": [
     {
+      "id": 0,
       "username": "goldenrabbit802",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "displayname": "Andy Dunn",
       "profilePicture": "https://randomuser.me/api/portraits/med/men/29.jpg",
       "following": 931,
@@ -9,7 +11,9 @@
       "isFollowing": false
     },
     {
+      "id": 1,
       "username": "sadtiger579",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "displayname": "Akhil Mardhekar",
       "profilePicture": "https://randomuser.me/api/portraits/med/men/84.jpg",
       "following": 9784,
@@ -17,7 +21,9 @@
       "isFollowing": false
     },
     {
+      "id": 2,
       "username": "angryelephant534",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "displayname": "Vito Roux",
       "profilePicture": "https://randomuser.me/api/portraits/med/men/45.jpg",
       "following": 1805,
@@ -25,7 +31,9 @@
       "isFollowing": false
     },
     {
+      "id": 3,
       "username": "browncat991",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "displayname": "Stacy Hernandez",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/15.jpg",
       "following": 348,
@@ -33,7 +41,9 @@
       "isFollowing": false
     },
     {
+      "id": 4,
       "username": "redbird773",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "displayname": "Aubrey Mitchell",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/61.jpg",
       "following": 5605,
@@ -41,7 +51,9 @@
       "isFollowing": false
     },
     {
+      "id": 5,
       "username": "ticklishgoose546",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "displayname": "Syuzanna Fisun",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/0.jpg",
       "following": 2210,
@@ -49,7 +61,9 @@
       "isFollowing": false
     },
     {
+      "id": 6,
       "username": "redpeacock793",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "displayname": "Noam Marchand",
       "profilePicture": "https://randomuser.me/api/portraits/med/men/10.jpg",
       "following": 1578,
@@ -57,7 +71,9 @@
       "isFollowing": false
     },
     {
+      "id": 7,
       "username": "ticklishmouse134",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "displayname": "Krasnovida Bocyurko",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/41.jpg",
       "following": 5612,
@@ -65,7 +81,9 @@
       "isFollowing": false
     },
     {
+      "id": 8,
       "username": "goldenmouse412",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "displayname": "Francisco Velasco",
       "profilePicture": "https://randomuser.me/api/portraits/med/men/39.jpg",
       "following": 5941,
@@ -73,7 +91,9 @@
       "isFollowing": false
     },
     {
+      "id": 9,
       "username": "blueostrich374",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "displayname": "Isobel Walker",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/20.jpg",
       "following": 1974,
@@ -81,7 +101,9 @@
       "isFollowing": false
     },
     {
+      "id": 10,
       "username": "sadtiger999",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "displayname": "Kelly Baker",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/88.jpg",
       "following": 7203,
@@ -89,7 +111,9 @@
       "isFollowing": false
     },
     {
+      "id":11,
       "username": "whitepeacock756",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "displayname": "Anirudh Banerjee",
       "profilePicture": "https://randomuser.me/api/portraits/med/men/7.jpg",
       "following": 1961,
@@ -97,7 +121,9 @@
       "isFollowing": false
     },
     {
+      "id": 12,
       "username": "whiteostrich329",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "displayname": "Jasmine Edwards",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/46.jpg",
       "following": 6874,
@@ -105,7 +131,9 @@
       "isFollowing": false
     },
     {
+      "id": 13,
       "username": "happygoose793",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "displayname": "Hunter Sirko",
       "profilePicture": "https://randomuser.me/api/portraits/med/men/35.jpg",
       "following": 1101,
@@ -113,7 +141,9 @@
       "isFollowing": false
     },
     {
+      "id": 14,
       "username": "angryrabbit391",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "displayname": "Lea Clark",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/20.jpg",
       "following": 826,
@@ -121,7 +151,9 @@
       "isFollowing": false
     },
     {
+      "id": 15,
       "username": "goldenwolf317",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "displayname": "Gül Erbay",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/82.jpg",
       "following": 5130,
@@ -129,11 +161,43 @@
       "isFollowing": false
     },
     {
+      "id": 16,
       "username": "lazygorilla369",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "displayname": "Dennis Mitchell",
       "profilePicture": "https://randomuser.me/api/portraits/med/men/13.jpg",
       "following": 6450,
       "followers": 1531,
+      "isFollowing": false
+    },
+    {
+      "id": 17,
+      "username": "porquetendencia",
+      "description": "Explicación de las tendencias de #Twitter",
+      "displayname": "¿Por qué es tendencia?",
+      "profilePicture": "https://pbs.twimg.com/profile_images/1250482189084622850/zm5g4ec3_400x400.jpg",
+      "following": 147,
+      "followers": 5245192,
+      "isFollowing": false
+    },
+    {
+      "id": 18,
+      "username": "zofycasper",
+      "description": "Libertarian/Economics/Everything",
+      "displayname": "Jx.",
+      "profilePicture": "https://pbs.twimg.com/profile_images/1675450631128240129/MP8QyEdN_400x400.jpg",
+      "following": 967,
+      "followers": 150,
+      "isFollowing": false
+    },
+    {
+      "id": 19,
+      "username": "IGN",
+      "description": "We're all about video games, movies, TV, and comics!",
+      "displayname": "IGN",
+      "profilePicture": "https://pbs.twimg.com/profile_images/1697674354056708096/1kagPve-_400x400.jpg",
+      "following": 1472,
+      "followers": 9462736,
       "isFollowing": false
     }
   ]
