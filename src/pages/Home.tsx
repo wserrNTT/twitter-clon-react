@@ -14,6 +14,7 @@ import type { pageProps } from '@/common/types';
 
 // Components
 import { Icon } from '@iconify/react';
+import Tweet from '@/components/Tweet';
 
 // Styles
 import '@/assets/Home.scss';
@@ -21,6 +22,8 @@ import '@/assets/Home.scss';
 const Home: FC<pageProps> = ({ title }) => {
   const [currentTab, setCurrentTab] = useState('forYou');
   const userData = useSelector((state: RootState) => state.login.data);
+  const tweets = useSelector((state: RootState) => state.samples.tweets);
+
   useEffect(() => {
     updateDocumentTitle(title);
   });
@@ -28,13 +31,13 @@ const Home: FC<pageProps> = ({ title }) => {
     <div className='home-container'>
       <div className='tabs'>
         <div
-          className={`tab ${currentTab === 'forYou' && 'tav-active'}`}
+          className={`tab ${currentTab === 'forYou' && 'tab-active'}`}
           onClick={() => setCurrentTab('forYou')}
         >
           <p className='text'>Para ti</p>
         </div>
         <div
-          className={`tab ${currentTab === 'following' && 'tav-active'}`}
+          className={`tab ${currentTab === 'following' && 'tab-active'}`}
           onClick={() => setCurrentTab('following')}
         >
           <p className='text'>Siguiendo</p>
@@ -63,7 +66,11 @@ const Home: FC<pageProps> = ({ title }) => {
           </div>
         </div>
       </div>
-      <div className='tweets-container'></div>
+      <div className='tweets-container'>
+        {tweets.map((tweet) => (
+          <Tweet tweet={tweet} key={tweet.id} />
+        ))}
+      </div>
     </div>
   );
 };

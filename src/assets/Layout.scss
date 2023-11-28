@@ -1,15 +1,29 @@
+@import "@/assets/mixins";
+$blueTwitter: #1b8bd6;
+$darkBlueTwitter: #1685cf;
+
+$lightGrey: #71767b;
+$grey: #313131;
+$darkGrey: #16181c;
+$white: #e7e9ea;
+
 .layout-container {
-  color: #e7e9ea;
+  color: $white;
   display: grid;
   grid-template-columns: 315px auto 440px;
   height: 100vh;
+  overflow-y: scroll;
 
   .main-sidebar {
+    position: sticky;
+    top: 0;
     display: flex;
     flex-direction: column;
     padding: 15px;
-    border-right: 1px solid #454545;
+    border-right: 1px solid $grey;
     padding-left: 50px;
+    max-height: 100vh;
+    z-index: 2;
 
     .item-list {
       font-size: 2.2rem;
@@ -26,12 +40,12 @@
         padding: 8px 20px 8px 14px;
         border-radius: 64px;
         text-decoration: none;
-        color: #e7e9ea;
+        color: $white;
         cursor: pointer;
         transition: background-color ease-in 0.2s;
 
         &:hover {
-          background-color: #313131;
+          background-color: $grey;
         }
 
         .icon {
@@ -48,7 +62,7 @@
       .item-post {
         margin-top: 10px;
         align-self: stretch;
-        background-color: #1d9bf0;
+        background-color: $blueTwitter;
 
         .icon {
           display: none;
@@ -60,9 +74,10 @@
         }
 
         &:hover {
-          background-color: #1b8bd6;
+          background-color: $darkBlueTwitter;
         }
       }
+
       .bold {
         font-weight: bold;
       }
@@ -101,7 +116,7 @@
       }
 
       &:hover.hover {
-        background-color: #313131;
+        background-color: $grey;
       }
 
       .submenu {
@@ -141,7 +156,7 @@
             transition: background-color 0.2s;
 
             &:hover {
-              background-color: #272727;
+              background-color: $grey;
             }
           }
         }
@@ -150,20 +165,24 @@
   }
 
   .right-sidebar {
-    border-left: 1px solid #454545;
-    max-height: 100vh;
+    position: sticky;
+    top: 0px;
+    border-left: 1px solid $grey;
+    height: 100vh;
     overflow-y: scroll;
+    @include hideScrollbar;
 
     .search-container {
       position: sticky;
       top: 0px;
       width: 100%;
+      height: 52px;
       padding: 5px 55px 5px 25px;
       background-color: black;
 
       .search {
         position: relative;
-        color: #71767b;
+        color: $lightGrey;
         font-size: 2rem;
 
         .icon {
@@ -177,7 +196,7 @@
           padding: 12px 50px;
           border-radius: 32px;
           background-color: #202327;
-          color: #71767b;
+          color: $lightGrey;
           font-size: 1.6rem;
           line-height: 1.6rem;
           border: none;
@@ -199,8 +218,8 @@
         padding: 10px 20px;
         row-gap: 8px;
         border-radius: 16px;
-        background-color: #16181c;
-        color: #e7e9ea;
+        background-color: $darkGrey;
+        color: $white;
         font-weight: bold;
 
         .title {
@@ -212,17 +231,17 @@
         }
 
         .subscribe-button {
-          background-color: #1b8bd6;
+          background-color: $blueTwitter;
           padding: 10px 20px;
           font-size: 1.5rem;
-          color: #e7e9ea;
+          color: $white;
           font-weight: bold;
           border: none;
           border-radius: 32px;
           cursor: pointer;
 
           &:hover {
-            background-color: #1685cf;
+            background-color: $darkBlueTwitter;
             transform: background-color ease-in 0.3s;
           }
         }
@@ -232,18 +251,18 @@
         display: flex;
         flex-direction: column;
         border-radius: 16px;
-        background-color: #16181c;
+        background-color: $darkGrey;
 
         .title {
           font-weight: bold;
           padding: 10px 20px 5px;
-          color: #e7e9ea;
+          color: $white;
         }
 
         .trend {
           display: flex;
           padding: 15px 20px;
-          color: #71767b;
+          color: $lightGrey;
           transition: background-color ease-in 0.2s;
           cursor: pointer;
 
@@ -256,7 +275,7 @@
             .name {
               font-size: 1.5rem;
               font-weight: bold;
-              color: #e7e9ea;
+              color: $white;
             }
           }
 
@@ -278,12 +297,12 @@
         display: flex;
         flex-direction: column;
         border-radius: 16px;
-        background-color: #16181c;
+        background-color: $darkGrey;
 
         .title {
           font-weight: bold;
           padding: 10px 20px 5px;
-          color: #e7e9ea;
+          color: $white;
         }
 
         .user {
@@ -292,7 +311,7 @@
           gap: 10px;
           padding: 12px 20px;
           font-size: 1.3rem;
-          color: #71767b;
+          color: $lightGrey;
           transition: background-color ease-in 0.2s;
           cursor: pointer;
 
@@ -306,14 +325,14 @@
             .display-name {
               font-size: 1.5rem;
               font-weight: bold;
-              color: #e7e9ea;
+              color: $white;
             }
           }
 
           .follow-button {
             margin-left: auto;
-            background-color: #e7e9ea;
-            color: #202327;
+            background-color: $white;
+            color: $grey;
             padding: 5px 10px;
             font-size: 1.5rem;
             border: none;
@@ -321,7 +340,7 @@
           }
 
           &:hover {
-            background-color: #202327;
+            background-color: $grey;
           }
 
           &:last-child {
@@ -331,7 +350,7 @@
       }
 
       .footer {
-        color: #71767b;
+        color: $lightGrey;
         display: flex;
         flex-wrap: wrap;
         column-gap: 20px;
@@ -350,6 +369,7 @@
       }
     }
   }
+
   .background {
     position: absolute;
     top: 0;

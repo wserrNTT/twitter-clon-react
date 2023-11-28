@@ -38,7 +38,3 @@ export const selectRandomUsers = createSelector(
   (state: RootState) => state.samples.users,
   (users) => shuffleArray(users).slice(0, 3)
 );
-export const selectTweets = createSelector(
-  (state: RootState) => state.samples.tweets,
-  (tweets) => tweets
-);

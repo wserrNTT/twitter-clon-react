@@ -1,0 +1,156 @@
+$blueTwitter: #1b8bd6;
+$greenTwitter: #1bd688;
+$redTwitter: #d61b88;
+
+$darkBlueTwitter: #1685cf;
+
+$lightGrey: #71767b;
+$grey: #313131;
+$darkGrey: #16181c;
+$white: #e7e9ea;
+
+.tweet {
+  display: flex;
+  border-bottom: solid 1px $grey;
+  padding: 15px;
+
+  .profile-container {
+    padding-right: 10px;
+
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+
+    }
+  }
+
+  .data {
+    .user-data {
+      display: flex;
+      gap: 5px;
+      font-size: 1.4rem;
+      color: $lightGrey;
+
+      .display-name {
+        font-weight: bold;
+        color: $white;
+      }
+
+      .options {
+        margin-left: auto;
+        font-size: 1.8rem;
+      }
+    }
+
+    .tweet-body {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 1.6rem;
+
+      .picture {
+        width: 100%;
+        height: auto;
+        border-radius: 16px;
+        border: solid 1px $grey;
+      }
+    }
+
+    .interactions {
+      display: flex;
+      padding-top: 5px;
+      font-size: 1.4rem;
+      color: $lightGrey;
+
+      .interaction {
+        display: flex;
+        align-items: center;
+        flex: auto;
+        cursor: pointer;
+        transition: color 0.3s;
+
+        .icon {
+          padding: 10px;
+          border-radius: 50%;
+          box-sizing: content-box;
+          transition: background-color 0.3s;
+        }
+      }
+
+      .comments {
+        .icon {
+          font-size: 1.8rem;
+        }
+
+        &:hover {
+          color: $blueTwitter;
+
+          .icon {
+            background-color: darken($blueTwitter, 40%);
+          }
+        }
+      }
+
+      .reposts {
+        .icon {
+          font-size: 2rem;
+        }
+
+        &:hover {
+          color: $greenTwitter;
+
+          .icon {
+            background-color: darken($greenTwitter, 40%);
+          }
+        }
+      }
+
+      .likes {
+        .icon {
+          font-size: 2rem;
+        }
+
+        &:hover {
+          color: $redTwitter;
+
+          .icon {
+            background-color: darken($redTwitter, 40%);
+          }
+        }
+      }
+
+      .views {
+
+        &:hover {
+          color: $blueTwitter;
+
+          .icon {
+            background-color: darken($blueTwitter, 40%);
+          }
+        }
+      }
+
+      .save,
+      .share {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+
+        .icon {
+          padding: 10px;
+          border-radius: 50%;
+          box-sizing: content-box;
+          transition: background-color 0.3s;
+          font-size: 1.8rem;
+
+          &:hover {
+            background-color: darken($blueTwitter, 40%);
+            color: $blueTwitter;
+          }
+        }
+      }
+    }
+  }
+}
