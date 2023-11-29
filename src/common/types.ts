@@ -1,7 +1,7 @@
 import type { Dispatch, SetStateAction } from 'react';
 
 export interface ILogin {
-  data: IUser | null;
+  data: IUser;
   isLoggedIn: boolean;
 }
 
@@ -18,7 +18,7 @@ export interface IUser {
 export interface ITrend {
   name: string;
   url: string;
-  tweet_volume: number | null;
+  tweet_volume?: number;
 }
 
 export interface ITweet {
