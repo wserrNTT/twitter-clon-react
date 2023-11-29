@@ -4,10 +4,19 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 // Types
 import type { ILogin, IUser } from '@/common/types';
 
+const defaultUser: IUser = {
+  id: 0,
+  displayname: '',
+  username: '',
+  followers: 0,
+  following: 0,
+  profilePicture: ''
+};
+
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    data: null,
+    data: defaultUser,
     isLoggedIn: false
   } as ILogin,
   reducers: {
@@ -17,7 +26,7 @@ export const userSlice = createSlice({
     },
     logout: (state: ILogin) => {
       state.isLoggedIn = false;
-      state.data = null;
+      state.data = defaultUser;
     }
   }
 });

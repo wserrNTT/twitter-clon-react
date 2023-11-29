@@ -4,6 +4,7 @@
   left: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100vw;
   height: 100vh;
   padding: 30px;
@@ -15,6 +16,7 @@
     padding: 10px 10px 50px;
     background-color: #000000;
     color: #ffffff;
+    height: min-content;
 
     .close-button {
       position: absolute;
