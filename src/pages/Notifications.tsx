@@ -1,18 +1,18 @@
-// React
-import { useEffect } from 'react';
-
-// Utils
-import { updateDocumentTitle } from '@/utils';
+// Hooks
+import { useTitle } from '@/hooks';
 
 // Types
 import type { FC } from 'react';
 import type { pageProps } from '@/common/types';
-
+import { shuffleArray } from '@/utils';
 const Notifications: FC<pageProps> = ({ title }) => {
-  useEffect(() => {
-    updateDocumentTitle(title);
-  });
-  return <div>Notifications</div>;
+  useTitle(title);
+
+  return <div>
+    <span>[1,2,3,4,5]</span>
+    <br />
+    <span>{shuffleArray([1,2,3,4,5])}</span>
+  </div>;
 };
 
 export default Notifications;

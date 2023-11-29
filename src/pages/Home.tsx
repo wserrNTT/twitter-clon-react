@@ -1,12 +1,12 @@
 // React
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 // Redux
 import { useSelector } from 'react-redux';
 import type { RootState } from '@/store';
 
-// Utils
-import { updateDocumentTitle } from '@/utils';
+// Hooks
+import { useTitle } from '@/hooks';
 
 // Types
 import type { FC } from 'react';
@@ -24,9 +24,7 @@ const Home: FC<pageProps> = ({ title }) => {
   const userData = useSelector((state: RootState) => state.login.data);
   const tweets = useSelector((state: RootState) => state.samples.tweets);
 
-  useEffect(() => {
-    updateDocumentTitle(title);
-  });
+  useTitle(title);
   return (
     <div className='home-container'>
       <div className='tabs'>

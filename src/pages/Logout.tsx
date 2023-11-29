@@ -11,8 +11,8 @@ import { useNavigate } from 'react-router-dom';
 // Components
 import { Icon } from '@iconify/react';
 
-// Utils
-import { updateDocumentTitle } from '@/utils';
+// Hooks
+import { useTitle } from '@/hooks';
 
 // Types
 import type { FC } from 'react';
@@ -33,9 +33,9 @@ const Logout: FC<pageProps> = ({ title }) => {
   useEffect(() => {
     if (!isLoggedIn) navigate('/register');
   }, [isLoggedIn, navigate]);
-  useEffect(() => {
-    updateDocumentTitle(title);
-  });
+
+  useTitle(title);
+
   return (
     <div className='logout-container'>
       <div className='logout'>

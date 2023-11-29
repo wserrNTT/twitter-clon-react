@@ -12,8 +12,8 @@ import { useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import Login from '@/components/Login';
 
-// Utils
-import { updateDocumentTitle } from '@/utils';
+// Hooks
+import { useTitle } from '@/hooks';
 
 // Types
 import type { FC } from 'react';
@@ -33,9 +33,8 @@ const Register: FC<pageProps> = ({ title }) => {
   useEffect(() => {
     if (isLoggenIn) navigate('/home');
   }, [isLoggenIn, navigate]);
-  useEffect(() => {
-    updateDocumentTitle(title);
-  });
+
+  useTitle(title);
 
   return (
     <>
