@@ -3,7 +3,6 @@ import type { Dispatch, SetStateAction } from 'react';
 export interface ILogin {
   data: IUser;
   isLoggedIn: boolean;
-  status: 'IDLE' | 'LOADING' | 'SUCCEEDED' | 'FAILED';
   error: string;
 }
 
