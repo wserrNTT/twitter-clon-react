@@ -2,7 +2,8 @@
 import { useState, useEffect } from 'react';
 
 // Redux
-import { useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { fetchTweets } from '@/store/tweet.store';
 import type { RootState } from '@/store';
 
 // React-router
@@ -25,14 +26,15 @@ import '@/assets/Register.scss';
 const Register: FC<pageProps> = ({ title }) => {
   const [showLogin, setShowLogin] = useState(false);
   const navigate = useNavigate();
-
-  const isLoggenIn = useSelector(
-    (state: RootState) => state.login.isLoggedIn
-  );
+  const dispatch = useAppDispatch();
+  const isLoggenIn = useAppSelector((state: RootState) => state.login.isLoggedIn);
 
   useEffect(() => {
-    if (isLoggenIn) navigate('/home');
-  }, [isLoggenIn, navigate]);
+    if (isLoggenIn) {
+      dispatch(fetchTweets());
+      navigate('/home');
+    }
+  }, [isLoggenIn, navigate, dispatch]);
 
   useTitle(title);
 
@@ -68,10 +70,7 @@ const Register: FC<pageProps> = ({ title }) => {
                 Términos de servicio{' '}
               </a>
               y la{' '}
-              <a
-                href='https://twitter.com/privacy'
-                className='highlighted'
-              >
+              <a href='https://twitter.com/privacy' className='highlighted'>
                 Política de privacidad
               </a>
               , incluída la política de{' '}
@@ -101,24 +100,16 @@ const Register: FC<pageProps> = ({ title }) => {
           <a href='https://help.twitter.com/'>Centro de Ayuda</a>
           <a href='https://twitter.com/tos'>Condiciones de Servicio</a>
           <a href='https://twitter.com/privacy'>Política de Privacidad</a>
-          <a href='https://support.twitter.com/articles/20170514'>
-            Política de Cookies
-          </a>
-          <a href='https://help.twitter.com/resources/accessibility'>
-            Accesibilidad
-          </a>
+          <a href='https://support.twitter.com/articles/20170514'>Política de Cookies</a>
+          <a href='https://help.twitter.com/resources/accessibility'>Accesibilidad</a>
           <a href='https://business.twitter.com/en/help/troubleshooting/how-twitter-ads-work.html?ref=web-twc-ao-gbl-adsinfo&utm_source=twc&utm_medium=web&utm_campaign=ao&utm_content=adsinfo'>
             Información de anuncios
           </a>
           <a href='https://blog.twitter.com/'>Blog</a>
           <a href='https://status.twitterstat.us/'>Estado</a>
           <a href='https://careers.twitter.com/'>Empleos</a>
-          <a href='https://about.twitter.com/press/brand-assets'>
-            Recursos para Marcas
-          </a>
-          <a href='https://ads.twitter.com/?ref=gl-tw-tw-twitter-advertise'>
-            Publicidad
-          </a>
+          <a href='https://about.twitter.com/press/brand-assets'>Recursos para Marcas</a>
+          <a href='https://ads.twitter.com/?ref=gl-tw-tw-twitter-advertise'>Publicidad</a>
           <a href='https://marketing.twitter.com/'>Marketing</a>
           <a href='https://business.twitter.com/?ref=web-twc-ao-gbl-twitterforbusiness&utm_source=twc&utm_medium=web&utm_campaign=ao&utm_content=twitterforbusiness'>
             X para empresas

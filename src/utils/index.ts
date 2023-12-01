@@ -1,5 +1,3 @@
-import type { rawTweet, IUser, ITweet } from '@/common/types';
-
 //Fisher-Yates Shuffle Algorithm
 export const shuffleArray = <T>(array: T[]) => {
   // Creates new array
@@ -12,13 +10,4 @@ export const shuffleArray = <T>(array: T[]) => {
     [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
   }
   return newArray;
-};
-
-// Parses raw tweets to ITweet
-export const loadTweets = (tweets: rawTweet[], users: IUser[]) => {
-  return tweets.map<ITweet>((tweet) => ({
-    ...tweet,
-    author: users.find((user) => user.id === tweet.authorID) ?? users[0],
-    timestamp: new Date(tweet.timestamp)
-  }));
 };

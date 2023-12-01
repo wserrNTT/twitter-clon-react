@@ -1,30 +1,31 @@
+import { useState } from 'react';
+
 // Redux
-import { useDispatch } from 'react-redux';
-import { login } from '@/store/login.store';
+import { useAppDispatch, useAppSelector } from '@/hooks';
+import { fetchLoginData, selectLoginError } from '@/store/login.store';
 
 // Components
 import { Icon } from '@iconify/react';
 
 // Types
-import type { FC } from 'react';
+import type { FC, ChangeEvent } from 'react';
 import type { modalProps } from '@/common/types';
 
 // Styes
 import '@/assets/Login.scss';
 
 const Login: FC<modalProps> = ({ setShow }) => {
-  const dispatch = useDispatch();
+  const [username, setUsername] = useState('');
+  const loginError = useAppSelector(selectLoginError);
+  const dispatch = useAppDispatch();
+
   const handleLogin = () => {
-    dispatch(
-      login({
-        username: 'user123',
-        displayname: 'user',
-        profilePicture:
-          'https://as1.ftcdn.net/v2/jpg/03/39/45/96/1000_F_339459697_XAFacNQmwnvJRqe1Fe9VOptPWMUxlZP8.jpg',
-        following: 625,
-        followers: 23
-      })
-    );
+    dispatch(fetchLoginData({ loginuser: username, loginpassword: '123456' }));
+  };
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target as HTMLInputElement;
+    setUsername(value);
   };
   const handleClose = () => {
     setShow(false);
@@ -35,6 +36,11 @@ const Login: FC<modalProps> = ({ setShow }) => {
         <div className='close-button' onClick={handleClose}>
           <Icon icon='tabler:x' />
         </div>
+        {loginError && (
+          <div className='error-container'>
+            <p className='text'>Lo sentimos, no pudimos encontrar tu cuenta</p>
+          </div>
+        )}
         <div className='login-form'>
           <div className='logo'>
             <Icon icon='simple-icons:x' />
@@ -54,7 +60,12 @@ const Login: FC<modalProps> = ({ setShow }) => {
             <span className='line'></span>
           </div>
           <div className='field'>
-            <input className='input' type='text' placeholder=' ' />
+            <input
+              className='input'
+              type='text'
+              placeholder=' '
+              onChange={handleChange}
+            />
             <span className='label'>Correo o nombre de usuario</span>
           </div>
           <button type='button' onClick={handleLogin}>

@@ -1,29 +1,27 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { trends } from '@/data/trends.json';
 import { users } from '@/data/users.json';
-import { tweets } from '@/data/tweets.json';
 
 // Types
-import { ITrend, ITweet, IUser } from '@/common/types';
-import { RootState } from '@/store';
-import { shuffleArray } from '@/utils';
+import type { ITrend, IUser } from '@/common/types';
+import type { RootState } from '@/store';
 
 // Utils
-import { loadTweets } from '@/utils';
+import { shuffleArray } from '@/utils';
 
 interface sampleData {
   trends: ITrend[];
   users: IUser[];
-  tweets: ITweet[];
 }
+
+const initialState: sampleData = {
+  trends: trends,
+  users: users
+};
 
 export const sampleSlice = createSlice({
   name: 'samples',
-  initialState: {
-    trends: trends,
-    users: users,
-    tweets: loadTweets(tweets, users)
-  } as sampleData,
+  initialState,
   reducers: {}
 });
 

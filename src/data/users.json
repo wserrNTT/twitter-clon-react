@@ -2,203 +2,183 @@
   "users": [
     {
       "id": 0,
-      "username": "goldenrabbit802",
+      "userName": "goldenrabbit802",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "displayname": "Andy Dunn",
+      "displayName": "Andy Dunn",
       "profilePicture": "https://randomuser.me/api/portraits/med/men/29.jpg",
-      "following": 931,
-      "followers": 5676,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 1,
-      "username": "sadtiger579",
+      "userName": "sadtiger579",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "displayname": "Akhil Mardhekar",
+      "displayName": "Akhil Mardhekar",
       "profilePicture": "https://randomuser.me/api/portraits/med/men/84.jpg",
-      "following": 9784,
-      "followers": 10042,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 2,
-      "username": "angryelephant534",
+      "userName": "angryelephant534",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "displayname": "Vito Roux",
+      "displayName": "Vito Roux",
       "profilePicture": "https://randomuser.me/api/portraits/med/men/45.jpg",
-      "following": 1805,
-      "followers": 6115,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 3,
-      "username": "browncat991",
+      "userName": "browncat991",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "displayname": "Stacy Hernandez",
+      "displayName": "Stacy Hernandez",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/15.jpg",
-      "following": 348,
-      "followers": 8131,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 4,
-      "username": "redbird773",
+      "userName": "redbird773",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "displayname": "Aubrey Mitchell",
+      "displayName": "Aubrey Mitchell",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/61.jpg",
-      "following": 5605,
-      "followers": 2249,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 5,
-      "username": "ticklishgoose546",
+      "userName": "ticklishgoose546",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "displayname": "Syuzanna Fisun",
+      "displayName": "Syuzanna Fisun",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/0.jpg",
-      "following": 2210,
-      "followers": 8979,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 6,
-      "username": "redpeacock793",
+      "userName": "redpeacock793",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "displayname": "Noam Marchand",
+      "displayName": "Noam Marchand",
       "profilePicture": "https://randomuser.me/api/portraits/med/men/10.jpg",
-      "following": 1578,
-      "followers": 8470,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 7,
-      "username": "ticklishmouse134",
+      "userName": "ticklishmouse134",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "displayname": "Krasnovida Bocyurko",
+      "displayName": "Krasnovida Bocyurko",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/41.jpg",
-      "following": 5612,
-      "followers": 7975,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 8,
-      "username": "goldenmouse412",
+      "userName": "goldenmouse412",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "displayname": "Francisco Velasco",
+      "displayName": "Francisco Velasco",
       "profilePicture": "https://randomuser.me/api/portraits/med/men/39.jpg",
-      "following": 5941,
-      "followers": 9140,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 9,
-      "username": "blueostrich374",
+      "userName": "blueostrich374",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "displayname": "Isobel Walker",
+      "displayName": "Isobel Walker",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/20.jpg",
-      "following": 1974,
-      "followers": 8789,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 10,
-      "username": "sadtiger999",
+      "userName": "sadtiger999",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "displayname": "Kelly Baker",
+      "displayName": "Kelly Baker",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/88.jpg",
-      "following": 7203,
-      "followers": 9337,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
-      "id":11,
-      "username": "whitepeacock756",
+      "id": 11,
+      "userName": "whitepeacock756",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "displayname": "Anirudh Banerjee",
+      "displayName": "Anirudh Banerjee",
       "profilePicture": "https://randomuser.me/api/portraits/med/men/7.jpg",
-      "following": 1961,
-      "followers": 8909,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 12,
-      "username": "whiteostrich329",
+      "userName": "whiteostrich329",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "displayname": "Jasmine Edwards",
+      "displayName": "Jasmine Edwards",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/46.jpg",
-      "following": 6874,
-      "followers": 4973,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 13,
-      "username": "happygoose793",
+      "userName": "happygoose793",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "displayname": "Hunter Sirko",
+      "displayName": "Hunter Sirko",
       "profilePicture": "https://randomuser.me/api/portraits/med/men/35.jpg",
-      "following": 1101,
-      "followers": 8874,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 14,
-      "username": "angryrabbit391",
+      "userName": "angryrabbit391",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "displayname": "Lea Clark",
+      "displayName": "Lea Clark",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/20.jpg",
-      "following": 826,
-      "followers": 8604,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 15,
-      "username": "goldenwolf317",
+      "userName": "goldenwolf317",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "displayname": "Gül Erbay",
+      "displayName": "Gül Erbay",
       "profilePicture": "https://randomuser.me/api/portraits/med/women/82.jpg",
-      "following": 5130,
-      "followers": 4582,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 16,
-      "username": "lazygorilla369",
+      "userName": "lazygorilla369",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "displayname": "Dennis Mitchell",
+      "displayName": "Dennis Mitchell",
       "profilePicture": "https://randomuser.me/api/portraits/med/men/13.jpg",
-      "following": 6450,
-      "followers": 1531,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 17,
-      "username": "porquetendencia",
+      "userName": "porquetendencia",
       "description": "Explicación de las tendencias de #Twitter",
-      "displayname": "¿Por qué es tendencia?",
+      "displayName": "¿Por qué es tendencia?",
       "profilePicture": "https://pbs.twimg.com/profile_images/1250482189084622850/zm5g4ec3_400x400.jpg",
-      "following": 147,
-      "followers": 5245192,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 18,
-      "username": "zofycasper",
+      "userName": "zofycasper",
       "description": "Libertarian/Economics/Everything",
-      "displayname": "Jx.",
+      "displayName": "Jx.",
       "profilePicture": "https://pbs.twimg.com/profile_images/1675450631128240129/MP8QyEdN_400x400.jpg",
-      "following": 967,
-      "followers": 150,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     },
     {
       "id": 19,
-      "username": "IGN",
+      "userName": "IGN",
       "description": "We're all about video games, movies, TV, and comics!",
-      "displayname": "IGN",
+      "displayName": "IGN",
       "profilePicture": "https://pbs.twimg.com/profile_images/1697674354056708096/1kagPve-_400x400.jpg",
-      "following": 1472,
-      "followers": 9462736,
-      "isFollowing": false
+      "following": [],
+      "followers": []
     }
   ]
 }

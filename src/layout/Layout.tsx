@@ -98,7 +98,7 @@ const Layout: FC = () => {
             <p className={`text ${itemIndex === 3 && 'bold'}`}>Mensajes</p>
           </Link>
           <Link
-            to={`/${userData?.username}/lists`}
+            to={`/${userData?.userName}/lists`}
             className='item'
             onClick={() => setItemIndex(4)}
           >
@@ -117,7 +117,7 @@ const Layout: FC = () => {
             <p className='text'>Premium</p>
           </div>
           <Link
-            to={`/${userData?.username}`}
+            to={`/${userData?.userName}`}
             className='item'
             onClick={() => setItemIndex(5)}
           >
@@ -148,8 +148,8 @@ const Layout: FC = () => {
             className='user-pfp'
           />
           <div className='user-info'>
-            <span className='display-name'> {userData?.displayname} </span>
-            <span className='user-name'>@{userData?.username}</span>
+            <span className='display-name'> {userData?.displayName} </span>
+            <span className='user-name'>@{userData?.userName}</span>
           </div>
           <Icon icon='mi:options-horizontal' className='icon' />
           {showMenu && (
@@ -157,7 +157,7 @@ const Layout: FC = () => {
               <div className='items'>
                 <p className='item'>Agregar una cuenta existente</p>
                 <p className='item' onClick={() => navigate('/logout')}>
-                  Cerrar la sesión de @{userData?.username}
+                  Cerrar la sesión de @{userData?.userName}
                 </p>
               </div>
             </div>
@@ -221,15 +221,15 @@ const Layout: FC = () => {
                   {itemIndex === 5 ? 'Tal vez te guste' : 'A quién seguir'}
                 </p>
                 {randomUsers.map((user) => (
-                  <div className='user' key={user.username}>
+                  <div className='user' key={user.userName}>
                     <img
                       className='profile-picture'
                       src={user.profilePicture}
-                      alt={user.displayname}
+                      alt={user.displayName}
                     />
                     <div className='info'>
-                      <p className='display-name'>{user.displayname}</p>
-                      <p className='user-name'>@{user.username}</p>
+                      <p className='display-name'>{user.displayName}</p>
+                      <p className='user-name'>@{user.userName}</p>
                     </div>
                     <button className='follow-button'>Seguir</button>
                   </div>

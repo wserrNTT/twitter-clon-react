@@ -2,12 +2,11 @@
 import { useState } from 'react';
 
 // Redux
-import { useSelector } from 'react-redux';
 import type { RootState } from '@/store';
 
 // Hooks
-import { useTitle } from '@/hooks';
-
+import { useTitle, useAppSelector } from '@/hooks';
+import { selectTweets } from '@/store/tweet.store';
 // Types
 import type { FC } from 'react';
 import type { pageProps } from '@/common/types';
@@ -21,8 +20,8 @@ import '@/assets/Home.scss';
 
 const Home: FC<pageProps> = ({ title }) => {
   const [currentTab, setCurrentTab] = useState('forYou');
-  const userData = useSelector((state: RootState) => state.login.data);
-  const tweets = useSelector((state: RootState) => state.samples.tweets);
+  const userData = useAppSelector((state: RootState) => state.login.data);
+  const tweets = useAppSelector(selectTweets);
 
   useTitle(title);
   return (
@@ -48,15 +47,11 @@ const Home: FC<pageProps> = ({ title }) => {
         <div className='profile-container'>
           <img
             src={userData?.profilePicture}
-            alt={`profile picture of ${userData?.displayname}`}
+            alt={`profile picture of ${userData?.displayName}`}
           />
         </div>
         <div className='input-container'>
-          <input
-            className='new-tweet'
-            type='text'
-            placeholder='¡¿Qué está pasando?!'
-          />
+          <input className='new-tweet' type='text' placeholder='¡¿Qué está pasando?!' />
           <div className='options'>
             <button type='button' className='post-button'>
               Postear
@@ -66,7 +61,7 @@ const Home: FC<pageProps> = ({ title }) => {
       </div>
       <div className='tweets-container'>
         {tweets.map((tweet) => (
-          <Tweet tweet={tweet} key={tweet.id} />
+          <Tweet tweet={tweet} key={tweet._id} />
         ))}
       </div>
     </div>

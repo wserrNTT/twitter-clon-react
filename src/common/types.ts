@@ -3,16 +3,17 @@ import type { Dispatch, SetStateAction } from 'react';
 export interface ILogin {
   data: IUser;
   isLoggedIn: boolean;
+  status: 'IDLE' | 'LOADING' | 'SUCCEEDED' | 'FAILED';
+  error: string;
 }
 
 export interface IUser {
-  id: number;
-  username: string;
-  displayname: string;
+  _id: number;
+  userName: string;
+  displayName: string;
   profilePicture: string;
-  following: number;
-  followers: number;
-  isFollowing?: boolean;
+  following: IUser[];
+  followers: IUser[];
 }
 
 export interface ITrend {
@@ -22,27 +23,27 @@ export interface ITrend {
 }
 
 export interface ITweet {
-  id: number;
+  _id: number;
   author: IUser;
-  timestamp: Date;
+  timeStamp: string;
   body: string;
   picture?: string;
-  comments: number;
-  reposts: number;
-  likes: number;
-  views: number;
+  comments: ITweet[];
+  reposts: IUser[];
+  likes: IUser[];
+  views: IUser[];
 }
 
 export interface rawTweet {
-  id: number;
+  _id: number;
   authorID: number;
-  timestamp: string;
+  timeStamp: string;
   body: string;
   picture?: string;
-  comments: number;
-  reposts: number;
-  likes: number;
-  views: number;
+  comments: ITweet[];
+  reposts: IUser[];
+  likes: IUser[];
+  views: IUser[];
 }
 
 export interface pageProps {

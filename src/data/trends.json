@@ -2,8 +2,7 @@
   "trends":  [
     {
       "name": "#GiftAGamer",
-      "url": "http://twitter.com/search?q=%23GiftAGamer",
-      "tweet_volume": null
+      "url": "http://twitter.com/search?q=%23GiftAGamer"
     },
     {
       "name": "#AskCuppyAnything",
@@ -12,8 +11,7 @@
     },
     {
       "name": "#givethanks",
-      "url": "http://twitter.com/search?q=%23givethanks",
-      "tweet_volume": null
+      "url": "http://twitter.com/search?q=%23givethanks"
     },
     {
       "name": "Carrefour",
