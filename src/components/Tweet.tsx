@@ -49,19 +49,19 @@ const Tweet: FC<{ tweet: ITweet }> = ({ tweet }) => {
         <div className='interactions'>
           <div className='interaction comments'>
             <Icon className='icon' icon='majesticons:comment-2-line' />
-            {tweet.comments.length}
+            {tweet.comments?.length}
           </div>
           <div className='interaction reposts'>
             <Icon className='icon' icon='bx:repost' />
-            {tweet.reposts.length}
+            {tweet.reposts?.length}
           </div>
           <div className='interaction likes'>
             <Icon className='icon' icon='mdi:heart-outline' />
-            {tweet.likes.length}
+            {tweet.likes?.length}
           </div>
           <div className='interaction views'>
             <Icon className='icon' icon='ion:stats-chart' />
-            {tweet.views.length}
+            {tweet.views?.length}
           </div>
           <div className=' save'>
             <Icon className='icon' icon='akar-icons:ribbon' />

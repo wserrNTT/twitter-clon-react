@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 
 // Redux
 import { useAppDispatch, useAppSelector } from '@/hooks';
-import { fetchTweets } from '@/store/tweet.store';
 import type { RootState } from '@/store';
 
 // React-router
@@ -31,7 +30,6 @@ const Register: FC<pageProps> = ({ title }) => {
 
   useEffect(() => {
     if (isLoggenIn) {
-      dispatch(fetchTweets());
       navigate('/home');
     }
   }, [isLoggenIn, navigate, dispatch]);

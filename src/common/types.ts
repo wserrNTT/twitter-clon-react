@@ -7,7 +7,7 @@ export interface ILogin {
 }
 
 export interface IUser {
-  _id: number;
+  _id: string;
   userName: string;
   displayName: string;
   profilePicture: string;
@@ -15,14 +15,13 @@ export interface IUser {
   followers: IUser[];
 }
 
-export interface ITrend {
+export interface IHashtag {
   name: string;
-  url: string;
   tweet_volume?: number;
 }
 
 export interface ITweet {
-  _id: number;
+  _id: string;
   author: IUser;
   timeStamp: string;
   body: string;
@@ -34,15 +33,10 @@ export interface ITweet {
 }
 
 export interface rawTweet {
-  _id: number;
-  authorID: number;
+  author: string;
   timeStamp: string;
   body: string;
   picture?: string;
-  comments: ITweet[];
-  reposts: IUser[];
-  likes: IUser[];
-  views: IUser[];
 }
 
 export interface pageProps {

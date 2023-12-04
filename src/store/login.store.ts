@@ -6,7 +6,7 @@ import type { RootState } from '@/store';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 const defaultUser: IUser = {
-  _id: 0,
+  _id: '',
   displayName: '',
   userName: '',
   followers: [],
@@ -45,3 +45,4 @@ export default loginSlice.reducer;
 
 // Redux Selectors
 export const selectLoginError = (state: RootState) => state.login.error;
+export const selectUser = (state: RootState) => state.login.data;

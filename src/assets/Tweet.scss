@@ -21,11 +21,11 @@ $white: #e7e9ea;
       width: 40px;
       height: 40px;
       border-radius: 50%;
-
     }
   }
 
   .data {
+    flex: auto;
     .user-data {
       display: flex;
       gap: 5px;
@@ -121,7 +121,6 @@ $white: #e7e9ea;
       }
 
       .views {
-
         &:hover {
           color: $blueTwitter;
 
@@ -136,7 +135,6 @@ $white: #e7e9ea;
         display: flex;
         align-items: center;
         cursor: pointer;
-
 
         .icon {
           padding: 10px;

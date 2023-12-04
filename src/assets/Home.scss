@@ -80,7 +80,6 @@ $white: #e7e9ea;
       z-index: 0;
     }
   }
-
   .post-container {
     display: flex;
     border-bottom: solid 1px $grey;
@@ -101,6 +100,10 @@ $white: #e7e9ea;
       display: flex;
       flex-direction: column;
       gap: 10px;
+      .loader-container {
+        display: flex;
+        justify-content: center;
+      }
 
       .new-tweet {
         padding-top: 5px;
@@ -108,7 +111,7 @@ $white: #e7e9ea;
         border: none;
         font-size: 2rem;
         outline: none;
-        color: $lightGrey;
+        color: $white;
       }
 
       .options {
@@ -129,8 +132,23 @@ $white: #e7e9ea;
             background-color: $darkBlueTwitter;
             transform: background-color ease-in 0.3s;
           }
+          &.disabled {
+            background-color: #0f4e78;
+            color: #808080;
+            pointer-events: none;
+          }
         }
       }
+    }
+  }
+  .tweets-container {
+    display: flex;
+    flex-direction: column-reverse;
+
+    .loader-container {
+      display: flex;
+      justify-content: center;
+      margin: 10px;
     }
   }
 }
