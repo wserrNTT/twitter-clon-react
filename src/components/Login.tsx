@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 // Redux
 import { useAppDispatch, useAppSelector, useForm } from '@/hooks';
-import { setError, login, selectLoginStore } from '@/store/login.store';
+import { setError, login, selectLoginStore } from '@/store/slices/login.store';
 
 // Components
 import { Icon } from '@iconify/react';

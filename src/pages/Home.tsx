@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react';
 
 // Redux
-import { selectTweetStore, fetchTweets } from '@/store/tweet.store';
-import { selectLoginStore } from '@/store/login.store';
+import { selectTweetStore, fetchTweets } from '@/store/slices/tweet.store';
+import { selectLoginStore } from '@/store/slices/login.store';
 
 // Hooks
 import { useTitle, useAppSelector, useAppDispatch } from '@/hooks';

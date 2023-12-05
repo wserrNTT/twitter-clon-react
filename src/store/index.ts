@@ -1,18 +1,37 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from '@reduxjs/toolkit';
 
-import loginStore from '@/store/login.store';
+// Middlewares
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import thunk from 'redux-thunk';
 
-import tweetStore from '@/store/tweet.store';
-import userStore from '@/store/user.store';
-import hashtagStore from '@/store/hashtag.store';
+// Stores
+import loginStore from '@/store/slices/login.store';
+import tweetStore from '@/store/slices/tweet.store';
+import userStore from '@/store/slices/user.store';
+import hashtagStore from '@/store/slices/hashtag.store';
 
-export const store = configureStore({
-  reducer: {
+// Config
+const persistConfig = {
+  key: 'rootStore',
+  storage,
+  whiteList: [loginStore]
+};
+
+const reducer = persistReducer(
+  persistConfig,
+  combineReducers({
     login: loginStore,
     tweetStore: tweetStore,
     userStore: userStore,
-    hashtagStore:hashtagStore
-  }
+    hashtagStore: hashtagStore
+  })
+);
+
+export const store = configureStore({
+  reducer,
+  middleware: [thunk]
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

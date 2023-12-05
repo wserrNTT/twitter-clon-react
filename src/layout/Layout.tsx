@@ -2,10 +2,10 @@
 import { FC, useEffect, useState } from 'react';
 
 // Redux
-import { selectLoginStore } from '@/store/login.store';
+import { selectLoginStore } from '@/store/slices/login.store';
 
-import { selectRandomUsers, fetchUsers } from '@/store/user.store';
-import { selectRandomHashtags, fetchHashtags } from '@/store/hashtag.store';
+import { selectRandomUsers, fetchUsers } from '@/store/slices/user.store';
+import { selectRandomHashtags, fetchHashtags } from '@/store/slices/hashtag.store';
 
 // React-router
 import { Outlet, useNavigate, Link } from 'react-router-dom';
