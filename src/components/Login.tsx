@@ -92,12 +92,12 @@ const Login: FC<modalProps> = ({ setShow: showModal }) => {
             </div>
             <p className='title'>Inicia sesión en X</p>
             <button type='button' className='empty-button'>
-              <Icon icon='devicon:google' width='1.6rem' />
-              Inicia sesión con Google
+              <Icon className='icon' icon='devicon:google' />
+              <p className='light-font'>Iniciar sesión con Google</p>
             </button>
             <button type='button' className='empty-button'>
-              <Icon icon='bi:apple' width='1.6rem' />
-              Inicia sesión con Apple
+              <Icon className='icon' icon='bi:apple' />
+              <p >Iniciar sesión con Apple</p>
             </button>
             <div className='separator'>
               <span className='line'></span>

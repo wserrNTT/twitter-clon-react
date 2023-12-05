@@ -1,4 +1,4 @@
-@import "@/assets/mixins";
+@import '@/assets/mixins';
 $blueTwitter: #1b8bd6;
 $darkBlueTwitter: #1685cf;
 
@@ -10,7 +10,8 @@ $white: #e7e9ea;
 .layout-container {
   color: $white;
   display: grid;
-  grid-template-columns: 315px auto 440px;
+  grid-template-columns: 315px 550px 440px;
+  justify-content: center;
   height: 100vh;
   overflow-y: scroll;
 
@@ -29,6 +30,7 @@ $white: #e7e9ea;
       font-size: 2.2rem;
       display: flex;
       flex-direction: column;
+      row-gap: 10px;
       align-items: flex-start;
       list-style: none;
 
@@ -133,15 +135,14 @@ $white: #e7e9ea;
         z-index: 2;
 
         &::after {
-          content: "";
+          content: '';
           position: absolute;
           bottom: -5px;
           left: calc(50% - 5px);
           width: 10px;
           height: 10px;
           background-color: #000000;
-          box-shadow:
-            rgba(255, 255, 255, 0.15) 2px 2px 2px 1px;
+          box-shadow: rgba(255, 255, 255, 0.15) 2px 2px 2px 1px;
           transform: rotate(45deg);
         }
 
@@ -389,6 +390,7 @@ $white: #e7e9ea;
 
       .item-list {
         align-items: center;
+        row-gap: 0px;
 
         .item {
           padding: 10px;
@@ -422,6 +424,19 @@ $white: #e7e9ea;
 
         .icon {
           display: none;
+        }
+        .submenu {
+          position: absolute;
+          bottom: calc(100% + 12px);
+          left: 0;
+          padding: 12px 0;
+          width: 280px;
+
+          &::after {
+            content: '';
+            bottom: -5px;
+            left: 30px;
+          }
         }
       }
     }

@@ -47,11 +47,11 @@ const Register: FC<pageProps> = ({ title }) => {
           <div className='buttons-container'>
             <h3>Únete Hoy</h3>
             <button type='button' className='empty-button'>
-              <Icon icon='devicon:google' width='1.6rem' />
+              <Icon className='icon' icon='devicon:google' />
               Registrate con Google
             </button>
             <button type='button' className='empty-button'>
-              <Icon icon='bi:apple' width='1.6rem' />
+              <Icon className='icon' icon='bi:apple' />
               Registrate con Apple
             </button>
             <div className='separator'>
