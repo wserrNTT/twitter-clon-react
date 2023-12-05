@@ -44,5 +44,4 @@ export const { login, logout, setError } = loginSlice.actions;
 export default loginSlice.reducer;
 
 // Redux Selectors
-export const selectLoginError = (state: RootState) => state.login.error;
-export const selectUser = (state: RootState) => state.login.data;
+export const selectLoginStore = (state: RootState) => state.login;

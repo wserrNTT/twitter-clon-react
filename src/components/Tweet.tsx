@@ -10,7 +10,7 @@ import '@/assets/Tweet.scss';
 
 const Tweet: FC<{ tweet: ITweet }> = ({ tweet }) => {
   // Formats timestamp
-  const toHours = (date: string) => {
+  const formatDate = (date: string) => {
     const dateConverted = new Date(date);
     const currentTime = new Date().valueOf();
     const seconds = (currentTime - dateConverted.valueOf()) / 1000;
@@ -18,8 +18,8 @@ const Tweet: FC<{ tweet: ITweet }> = ({ tweet }) => {
     if (seconds <= 60) return `${Math.floor(seconds)}s`;
     // format in case of minutes
     if (seconds <= 3600) return `${Math.floor(seconds / 60)}m`;
-    // format in case of minutes
-    if (seconds <= 86400) return `${Math.floor(seconds / 1440)}h`;
+    // format in case of hours
+    if (seconds <= 86400) return `${Math.floor(seconds / 3600)}h`;
     return dateConverted
       .toLocaleString('default', { day: '2-digit', month: 'short' })
       .replace('-', ' ');
@@ -37,7 +37,7 @@ const Tweet: FC<{ tweet: ITweet }> = ({ tweet }) => {
         <div className='user-data'>
           <p className='display-name'>{tweet.author.displayName}</p>
           <p className='user-name'>@{tweet.author.userName}</p>·
-          <p className='timestamp'>{toHours(tweet.timeStamp)}</p>
+          <p className='timestamp'>{formatDate(tweet.timeStamp)}</p>
           <div className='options'>
             <Icon icon='mi:options-horizontal' className='icon' />
           </div>

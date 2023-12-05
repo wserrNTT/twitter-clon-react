@@ -2,14 +2,14 @@
 import { useState, useEffect } from 'react';
 
 // Redux
-import { selectTweets, setTweetsError, setTweets } from '@/store/tweet.store';
-import { selectUser } from '@/store/login.store';
+import { selectTweetStore, fetchTweets } from '@/store/tweet.store';
+import { selectLoginStore } from '@/store/login.store';
 
 // Hooks
 import { useTitle, useAppSelector, useAppDispatch } from '@/hooks';
 
 // Utils
-import { getTweets, postTweet } from '@/utils/axios';
+import { postTweet } from '@/utils/axios';
 // Types
 import type { FC, ChangeEvent, FormEvent } from 'react';
 import type { pageProps } from '@/common/types';
@@ -26,46 +26,34 @@ const Home: FC<pageProps> = ({ title }) => {
   useTitle(title);
   const [currentTab, setCurrentTab] = useState<string>('forYou');
 
-  const [newPost, setNewPost] = useState<{
+  interface newTweet {
     body: string;
     loading: boolean;
     error: string;
-  }>({
+  }
+
+  const [newPost, setNewPost] = useState<newTweet>({
     body: '',
     loading: false,
     error: ''
   });
-  const userData = useAppSelector(selectUser);
+  const loginStore = useAppSelector(selectLoginStore);
 
-  const tweets = useAppSelector(selectTweets);
-  const [tweetsLoading, setTweetsLoading] = useState<boolean>(false);
+  const tweetStore = useAppSelector(selectTweetStore);
 
   const dispatch = useAppDispatch();
-
-  const fetchTweets = async () => {
-    setTweetsLoading(true);
-    try {
-      const { data } = await getTweets();
-      dispatch(setTweets(data));
-      dispatch(setTweetsError(''));
-      setTweetsLoading(false);
-    } catch (error) {
-      dispatch(setTweetsError('Error al cargar el contenido'));
-      setTweetsLoading(false);
-    }
-  };
 
   const handlePost = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setNewPost({ ...newPost, loading: true });
     try {
       await postTweet({
-        author: userData._id,
+        author: loginStore.data._id,
         body: newPost.body,
         timeStamp: new Date().toString()
       });
       setNewPost({ body: '', loading: false, error: '' });
-      fetchTweets();
+      dispatch(fetchTweets());
     } catch (error) {
       setNewPost({
         body: '',
@@ -80,7 +68,7 @@ const Home: FC<pageProps> = ({ title }) => {
     setNewPost({ ...newPost, body: value });
   };
   useEffect(() => {
-    fetchTweets();
+    dispatch(fetchTweets());
   }, []);
   return (
     <div className='home-container'>
@@ -104,8 +92,8 @@ const Home: FC<pageProps> = ({ title }) => {
       <div className='post-container'>
         <div className='profile-container'>
           <img
-            src={userData?.profilePicture}
-            alt={`profile picture of ${userData?.displayName}`}
+            src={loginStore.data?.profilePicture}
+            alt={`profile picture of ${loginStore.data?.displayName}`}
           />
         </div>
         <form className='input-container' onSubmit={handlePost}>
@@ -135,12 +123,12 @@ const Home: FC<pageProps> = ({ title }) => {
         </form>
       </div>
       <div className='tweets-container'>
-        {tweetsLoading ? (
+        {tweetStore.status === 'LOADING' ? (
           <div className='loader-container'>
             <Loader />
           </div>
         ) : (
-          tweets.map((tweet) => <Tweet tweet={tweet} key={tweet._id} />)
+          tweetStore.tweets.map((tweet) => <Tweet tweet={tweet} key={tweet._id} />)
         )}
       </div>
     </div>

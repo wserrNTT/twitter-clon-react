@@ -2,15 +2,17 @@
 import { FC, useEffect, useState } from 'react';
 
 // Redux
-import { useSelector } from 'react-redux';
-import type { RootState } from '@/store';
-import {
-  selectRandomTrends,
-  selectRandomUsers
-} from '@/store/sample.store';
+import { selectLoginStore } from '@/store/login.store';
+
+import { selectRandomUsers, fetchUsers } from '@/store/user.store';
+import { selectRandomHashtags, fetchHashtags } from '@/store/hashtag.store';
 
 // React-router
 import { Outlet, useNavigate, Link } from 'react-router-dom';
+
+// Hooks
+import { useAppSelector, useAppDispatch } from '@/hooks';
+
 // Components
 import { Icon } from '@iconify/react';
 
@@ -18,19 +20,25 @@ import { Icon } from '@iconify/react';
 import '@/assets/Layout.scss';
 
 const Layout: FC = () => {
-  const isLoggenIn = useSelector(
-    (state: RootState) => state.login.isLoggedIn
-  );
-  const userData = useSelector((state: RootState) => state.login.data);
-  const randomTrends = useSelector(selectRandomTrends);
-  const randomUsers = useSelector(selectRandomUsers);
+  const loginStore = useAppSelector(selectLoginStore);
+
+  const randomHashtags = useAppSelector(selectRandomHashtags);
+  const randomUsers = useAppSelector(selectRandomUsers);
+  const dispatch = useAppDispatch();
+
   const navigate = useNavigate();
 
   const [itemIndex, setItemIndex] = useState<number>(0);
   const [showMenu, setShowMenu] = useState(false);
+
   useEffect(() => {
-    if (!isLoggenIn) navigate('/');
-  }, [isLoggenIn, navigate]);
+    dispatch(fetchUsers());
+    dispatch(fetchHashtags());
+  }, []);
+
+  useEffect(() => {
+    if (!loginStore.isLoggedIn) navigate('/');
+  }, [loginStore.isLoggedIn, navigate]);
 
   return (
     <div className='layout-container'>
@@ -39,11 +47,7 @@ const Layout: FC = () => {
           <Link to='/home' className='item home'>
             <Icon className='icon' icon='simple-icons:x' />
           </Link>
-          <Link
-            to='/home'
-            className='item'
-            onClick={() => setItemIndex(0)}
-          >
+          <Link to='/home' className='item' onClick={() => setItemIndex(0)}>
             <Icon
               className='icon'
               icon={
@@ -54,39 +58,21 @@ const Layout: FC = () => {
             />
             <p className={`text ${itemIndex === 0 && 'bold'}`}>Inicio</p>
           </Link>
-          <Link
-            to='/explore'
-            className='item'
-            onClick={() => setItemIndex(1)}
-          >
+          <Link to='/explore' className='item' onClick={() => setItemIndex(1)}>
             <Icon
               className='icon'
-              icon={
-                itemIndex === 1
-                  ? 'iconamoon:search-bold'
-                  : 'iconamoon:search'
-              }
+              icon={itemIndex === 1 ? 'iconamoon:search-bold' : 'iconamoon:search'}
             />
             <p className={`text ${itemIndex === 1 && 'bold'}`}>Explorar</p>
           </Link>
-          <Link
-            to='/notifications'
-            className='item'
-            onClick={() => setItemIndex(2)}
-          >
+          <Link to='/notifications' className='item' onClick={() => setItemIndex(2)}>
             <Icon
               className='icon'
               icon={itemIndex === 2 ? 'ph:bell-fill' : 'ph:bell-light'}
             />
-            <p className={`text ${itemIndex === 2 && 'bold'}`}>
-              Notificaciones
-            </p>
+            <p className={`text ${itemIndex === 2 && 'bold'}`}>Notificaciones</p>
           </Link>
-          <Link
-            to='/messages'
-            className='item'
-            onClick={() => setItemIndex(3)}
-          >
+          <Link to='/messages' className='item' onClick={() => setItemIndex(3)}>
             <Icon
               className='icon'
               icon={
@@ -98,7 +84,7 @@ const Layout: FC = () => {
             <p className={`text ${itemIndex === 3 && 'bold'}`}>Mensajes</p>
           </Link>
           <Link
-            to={`/${userData?.userName}/lists`}
+            to={`/${loginStore.data?.userName}/lists`}
             className='item'
             onClick={() => setItemIndex(4)}
           >
@@ -117,15 +103,13 @@ const Layout: FC = () => {
             <p className='text'>Premium</p>
           </div>
           <Link
-            to={`/${userData?.userName}`}
+            to={`/${loginStore.data?.userName}`}
             className='item'
             onClick={() => setItemIndex(5)}
           >
             <Icon
               className='icon'
-              icon={
-                itemIndex === 5 ? 'heroicons:user-solid' : 'heroicons:user'
-              }
+              icon={itemIndex === 5 ? 'heroicons:user-solid' : 'heroicons:user'}
             />
             <p className={`text ${itemIndex === 5 && 'bold'}`}>Perfil</p>
           </Link>
@@ -138,18 +122,11 @@ const Layout: FC = () => {
             <p className='text'>Postear</p>
           </div>
         </div>
-        <div
-          className={`user ${!showMenu && 'hover'}`}
-          onClick={() => setShowMenu(true)}
-        >
-          <img
-            src={userData?.profilePicture}
-            alt=''
-            className='user-pfp'
-          />
+        <div className={`user ${!showMenu && 'hover'}`} onClick={() => setShowMenu(true)}>
+          <img src={loginStore.data?.profilePicture} alt='' className='user-pfp' />
           <div className='user-info'>
-            <span className='display-name'> {userData?.displayName} </span>
-            <span className='user-name'>@{userData?.userName}</span>
+            <span className='display-name'> {loginStore.data?.displayName} </span>
+            <span className='user-name'>@{loginStore.data?.userName}</span>
           </div>
           <Icon icon='mi:options-horizontal' className='icon' />
           {showMenu && (
@@ -157,7 +134,7 @@ const Layout: FC = () => {
               <div className='items'>
                 <p className='item'>Agregar una cuenta existente</p>
                 <p className='item' onClick={() => navigate('/logout')}>
-                  Cerrar la sesión de @{userData?.userName}
+                  Cerrar la sesión de @{loginStore.data?.userName}
                 </p>
               </div>
             </div>
@@ -171,11 +148,7 @@ const Layout: FC = () => {
           <div className='search-container'>
             <div className='search'>
               <Icon className='icon' icon='iconamoon:search' />
-              <input
-                className='input-search'
-                type='text'
-                placeholder='Buscar'
-              />
+              <input className='input-search' type='text' placeholder='Buscar' />
             </div>
           </div>
           <div className='sidebar-items'>
@@ -183,9 +156,8 @@ const Layout: FC = () => {
               <div className='premium'>
                 <p className='title'>Suscríbete a Premium</p>
                 <p className='body'>
-                  Suscríbete para desbloquear nuevas funciones y, si eres
-                  elegible, recibir un pago de cuota de ingresos por
-                  anuncios.
+                  Suscríbete para desbloquear nuevas funciones y, si eres elegible,
+                  recibir un pago de cuota de ingresos por anuncios.
                 </p>
                 <button type='button' className='subscribe-button'>
                   Suscribirse
@@ -196,20 +168,17 @@ const Layout: FC = () => {
               <div className='trends'>
                 <p className='title'>Tendencias para ti</p>
 
-                {randomTrends.map((trend) => (
-                  <div className='trend' key={trend.name}>
+                {randomHashtags.map((hashtag) => (
+                  <div className='trend' key={hashtag.name}>
                     <div className='info'>
                       <p className='header'>Tendencia</p>
-                      <p className='name'>{trend.name}</p>
+                      <p className='name'>{hashtag.name}</p>
                       <p className='volume' v-if='trend.tweet_volume'>
-                        {trend.tweet_volume} posts
+                        {hashtag.tweet_volume?.length} posts
                       </p>
                     </div>
                     <div className='options'>
-                      <Icon
-                        icon='mi:options-horizontal'
-                        className='icon'
-                      />
+                      <Icon icon='mi:options-horizontal' className='icon' />
                     </div>
                   </div>
                 ))}
@@ -243,16 +212,10 @@ const Layout: FC = () => {
               <a className='link' href='https://twitter.com/privacy'>
                 Política de Privacidad
               </a>
-              <a
-                className='link'
-                href='https://support.twitter.com/articles/20170514'
-              >
+              <a className='link' href='https://support.twitter.com/articles/20170514'>
                 Política de cookies
               </a>
-              <a
-                className='link'
-                href='https://help.twitter.com/resources/accessibility'
-              >
+              <a className='link' href='https://help.twitter.com/resources/accessibility'>
                 Accesibilidad
               </a>
               <a
@@ -267,12 +230,7 @@ const Layout: FC = () => {
           </div>
         </aside>
       )}
-      {showMenu && (
-        <div
-          className='background'
-          onClick={() => setShowMenu(false)}
-        ></div>
-      )}
+      {showMenu && <div className='background' onClick={() => setShowMenu(false)}></div>}
     </div>
   );
 };

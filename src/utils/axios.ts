@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import type { ITweet, IUser, rawTweet } from '@/common/types';
+import type { IHashtag, ITweet, IUser, rawTweet } from '@/common/types';
 
 const axiosTwitter = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER_URL}`,
@@ -22,7 +22,7 @@ export const getTweets = async (): Promise<AxiosResponse<ITweet[]>> =>
 export const getTweetById = async (id: string): Promise<AxiosResponse<ITweet>> =>
   await axiosTwitter.get(`/api/tweets/${id}`);
 
-// POST
+// POST new Tweet
 export const postTweet = async (newTweet: rawTweet) => {
   await axiosTwitter.post('/api/tweets', newTweet);
 };
@@ -36,3 +36,7 @@ export const getUserByUsername = async (
   username: string
 ): Promise<AxiosResponse<ITweet>> =>
   await axiosTwitter.get(`/api/users?username=${username}`);
+
+// GET all hashtags
+export const getHashtags = async (): Promise<AxiosResponse<IHashtag[]>> =>
+  await axiosTwitter.get('/api/hashtags');

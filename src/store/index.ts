@@ -1,14 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import loginStore from '@/store/login.store';
-import sampleStore from '@/store/sample.store';
+
 import tweetStore from '@/store/tweet.store';
+import userStore from '@/store/user.store';
+import hashtagStore from '@/store/hashtag.store';
 
 export const store = configureStore({
   reducer: {
     login: loginStore,
-    samples: sampleStore,
-    tweetStore: tweetStore
+    tweetStore: tweetStore,
+    userStore: userStore,
+    hashtagStore:hashtagStore
   }
 });
 

@@ -1,47 +1,54 @@
 import { useState } from 'react';
 
 // Redux
-import { useAppDispatch, useAppSelector } from '@/hooks';
-import { setError, login, selectLoginError } from '@/store/login.store';
+import { useAppDispatch, useAppSelector, useForm } from '@/hooks';
+import { setError, login, selectLoginStore } from '@/store/login.store';
 
 // Components
 import { Icon } from '@iconify/react';
 import Loader from '@/components/Loader';
 
 // Types
-import type { FC, ChangeEvent, FormEvent } from 'react';
+import type { FC, FormEvent } from 'react';
 import type { modalProps } from '@/common/types';
 
-// Utils
+// Axios methods
 import { getLoginUser, getUserByUsername } from '@/utils/axios';
 
 // Styes
 import '@/assets/Login.scss';
 
-const Login: FC<modalProps> = ({ setShow }) => {
-  const [userData, setUserData] = useState<{ username: string; password: string }>({
+interface formData {
+  username: string;
+  password: string;
+}
+
+const Login: FC<modalProps> = ({ setShow: showModal }) => {
+  const { username, password, updateForm } = useForm<formData>({
     username: '',
     password: ''
   });
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [step, setStep] = useState<number>(1);
+  const [page, setPage] = useState<number>(1);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const loginError = useAppSelector(selectLoginError);
+  const loginStore = useAppSelector(selectLoginStore);
   const dispatch = useAppDispatch();
 
+  // validates if user exists in DB
   const checkUser = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setIsLoading(true);
-    if (userData.username.length === 0) {
+    if (username.length === 0) {
       setIsLoading(false);
       return dispatch(setError('Lo sentimos, no pudimos encontrar tu cuenta'));
     }
     try {
-      await getUserByUsername(userData.username);
+      await getUserByUsername(username);
       dispatch(setError(''));
-      setStep(2);
+      setPage(2);
       setIsLoading(false);
     } catch (error) {
       dispatch(setError('Lo sentimos, no pudimos encontrar tu cuenta'));
@@ -53,12 +60,12 @@ const Login: FC<modalProps> = ({ setShow }) => {
     event.preventDefault();
 
     setIsLoading(true);
-    if (userData.password.length === 0) {
+    if (password.length === 0) {
       setIsLoading(false);
       return dispatch(setError('Ingresa una contraseña'));
     }
     try {
-      const { data } = await getLoginUser(userData.username, userData.password);
+      const { data } = await getLoginUser(username, password);
       setIsLoading(false);
       dispatch(login(data.user));
     } catch (error) {
@@ -66,30 +73,19 @@ const Login: FC<modalProps> = ({ setShow }) => {
       return dispatch(setError('Contraseña incorrecta'));
     }
   };
-  // Updates state value from input
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = event.target as HTMLInputElement;
-    setUserData({
-      ...userData,
-      [name]: value
-    });
-  };
-  // Closes the modal window
-  const handleClose = () => {
-    setShow(false);
-  };
+
   return (
     <div className='login-background'>
       <div className='login-container'>
-        <div className='close-button' onClick={handleClose}>
+        <div className='close-button' onClick={() => showModal(false)}>
           <Icon icon='tabler:x' />
         </div>
-        {loginError.length > 0 && (
+        {loginStore.error.length > 0 && (
           <div className='error-container'>
-            <p className='text'>{loginError}</p>
+            <p className='text'>{loginStore.error}</p>
           </div>
         )}
-        {step === 1 && !isLoading && (
+        {page === 1 && !isLoading && (
           <form className='username-form' onSubmit={checkUser}>
             <div className='logo'>
               <Icon icon='simple-icons:x' />
@@ -115,7 +111,7 @@ const Login: FC<modalProps> = ({ setShow }) => {
                 autoFocus
                 name='username'
                 placeholder=' '
-                onChange={handleChange}
+                onChange={updateForm}
               />
               <span className='label'>Correo o nombre de usuario</span>
             </div>
@@ -125,13 +121,13 @@ const Login: FC<modalProps> = ({ setShow }) => {
             </button>
             <p className='register-message'>
               ¿No tienes una cuenta?{' '}
-              <span className='highlighted' onClick={handleClose}>
+              <span className='highlighted' onClick={() => showModal(false)}>
                 Regístrate
               </span>
             </p>
           </form>
         )}
-        {step === 2 && !isLoading && (
+        {page === 2 && !isLoading && (
           <form className='login-form' onSubmit={handleLogin}>
             <div className='logo'>
               <Icon icon='simple-icons:x' />
@@ -142,7 +138,7 @@ const Login: FC<modalProps> = ({ setShow }) => {
                 className='input'
                 type='text'
                 placeholder=' '
-                value={userData.username}
+                value={username}
                 disabled
               />
               <span className='label'>Nombre de usuario</span>
@@ -154,7 +150,7 @@ const Login: FC<modalProps> = ({ setShow }) => {
                 autoFocus
                 name='password'
                 placeholder=' '
-                onChange={handleChange}
+                onChange={updateForm}
               />
               <span className='label'>Contraseña</span>
               <span
@@ -166,15 +162,14 @@ const Login: FC<modalProps> = ({ setShow }) => {
             </div>
             <button
               type='submit'
-              className={`login-button ${
-                userData.password.length === 0 && 'button-disabled'
-              }`}
+              className={`login-button ${password.length === 0 && 'button-disabled'}`}
+              disabled={password.length === 0}
             >
               Iniciar sesión
             </button>
             <p className='register-message'>
               ¿No tienes una cuenta?{' '}
-              <span className='highlighted' onClick={handleClose}>
+              <span className='highlighted' onClick={() => showModal(false)}>
                 Regístrate
               </span>
             </p>
