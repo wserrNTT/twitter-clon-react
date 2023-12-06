@@ -383,7 +383,7 @@ $white: #e7e9ea;
 
 @media screen and (max-width: 1200px) {
   .layout-container {
-    grid-template-columns: 90px auto 300px;
+    grid-template-columns: 90px 450px min-content;
 
     .main-sidebar {
       padding: 10px 5px;
@@ -446,6 +446,7 @@ $white: #e7e9ea;
 @media screen and (max-width: 1000px) {
   .layout-container {
     grid-template-columns: 90px auto;
+    justify-content: stretch;
 
     .right-sidebar {
       display: none;
