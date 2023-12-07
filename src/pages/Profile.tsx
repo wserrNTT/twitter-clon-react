@@ -10,9 +10,9 @@ import type { FC } from 'react';
 const Profile: FC = () => {
   const userData = useSelector((state: RootState) => state.login?.data);
 
-  useTitle(`${userData?.displayname} (@${userData?.username}) /X`);
+  useTitle(`${userData?.displayName} (@${userData?.userName}) /X`);
 
-  return <div>{userData?.displayname}'s Profile</div>;
+  return <div>{userData?.displayName}'s Profile</div>;
 };
 
 export default Profile;

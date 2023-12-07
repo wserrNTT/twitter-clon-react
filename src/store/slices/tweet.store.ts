@@ -7,16 +7,12 @@ import { getTweets } from '@/utils/axios';
 import type { ITweet } from '@/common/types';
 import { RootState } from '@/store';
 
-export const fetchTweets = createAsyncThunk(
-  'tweets/fetchTweets',
-  async (payload, { rejectWithValue }) => {
-    const { data, status } = await getTweets();
-    if (status !== 200) return rejectWithValue(status);
-    return data;
-  }
-);
+export const fetchTweets = createAsyncThunk('tweets/fetchTweets', async () => {
+  const { data } = await getTweets();
+  return data;
+});
 
-interface tweetsData {
+interface tweetState {
   tweets: ITweet[];
   status: 'IDLE' | 'LOADING' | 'SUCCEEDED' | 'FAILED';
   error: string;
@@ -28,7 +24,7 @@ const tweetSlice = createSlice({
     tweets: [],
     status: 'IDLE',
     error: ''
-  } as tweetsData,
+  } as tweetState,
   reducers: {},
   extraReducers: (builder) => {
     builder

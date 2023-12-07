@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react';
 
 // Redux
-import { useAppDispatch, useAppSelector } from '@/hooks';
-import type { RootState } from '@/store';
+import { useAppSelector } from '@/hooks';
+import { selectLoginStore } from '@/store/slices/login.store';
 
 // React-router
 import { useNavigate } from 'react-router-dom';
@@ -25,16 +25,14 @@ import '@/assets/Register.scss';
 const Register: FC<pageProps> = ({ title }) => {
   const [showLogin, setShowLogin] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const isLoggenIn = useAppSelector((state: RootState) => state.login.isLoggedIn);
-
+  const { isLoggedIn } = useAppSelector(selectLoginStore);
+  
+  useTitle(title);
   useEffect(() => {
-    if (isLoggenIn) {
+    if (isLoggedIn) {
       navigate('/home');
     }
-  }, [isLoggenIn, navigate, dispatch]);
-
-  useTitle(title);
+  }, [isLoggedIn]);
 
   return (
     <>

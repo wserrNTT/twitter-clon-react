@@ -45,3 +45,10 @@ export interface pageProps {
 export interface modalProps {
   setShow: Dispatch<SetStateAction<boolean>>;
 }
+export type routeName =
+  | 'home'
+  | 'explore'
+  | 'messages'
+  | 'notifications'
+  | 'profile'
+  | 'lists';

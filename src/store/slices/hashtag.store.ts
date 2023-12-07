@@ -8,16 +8,12 @@ import { shuffleArray } from '@/utils';
 import type { IHashtag } from '@/common/types';
 import { RootState } from '@/store';
 
-export const fetchHashtags = createAsyncThunk(
-  'hashtags/fetchHashtags',
-  async (payload, { rejectWithValue }) => {
-    const { data, status } = await getHashtags();
-    if (status !== 200) return rejectWithValue(status);
-    return data;
-  }
-);
+export const fetchHashtags = createAsyncThunk('hashtags/fetchHashtags', async () => {
+  const { data } = await getHashtags();
+  return data;
+});
 
-interface hashtagData {
+interface hashtagState {
   hashtags: IHashtag[];
   status: 'IDLE' | 'LOADING' | 'SUCCEEDED' | 'FAILED';
   error: string;
@@ -29,7 +25,7 @@ const hashtagSlice = createSlice({
     hashtags: [],
     status: 'IDLE',
     error: ''
-  } as hashtagData,
+  } as hashtagState,
   reducers: {},
   extraReducers: (builder) => {
     builder

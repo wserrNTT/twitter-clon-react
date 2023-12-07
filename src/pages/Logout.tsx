@@ -30,7 +30,7 @@ const Logout: FC<pageProps> = ({ title }) => {
 
   useEffect(() => {
     if (!isLoggedIn) navigate('/register');
-  }, [isLoggedIn, navigate]);
+  }, [isLoggedIn]);
 
   useTitle(title);
 

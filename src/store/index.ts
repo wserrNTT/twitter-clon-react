@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from '@reduxjs/toolkit';
 
 // Middlewares
-import { persistReducer } from 'redux-persist';
+import { persistReducer, PERSIST } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 
@@ -31,7 +31,10 @@ const reducer = persistReducer(
 
 export const store = configureStore({
   reducer,
-  middleware: [thunk]
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: { ignoredActions: [PERSIST] }
+    }).concat(thunk)
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

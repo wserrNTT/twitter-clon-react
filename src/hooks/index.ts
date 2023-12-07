@@ -7,7 +7,7 @@ import type { RootState, AppDispatch } from '@/store';
 export const useTitle = (title: string) => {
   useEffect(() => {
     document.title = title;
-  });
+  }, []);
 };
 
 // Manage data from forms
@@ -26,8 +26,6 @@ export const useForm = <T>(initialState: T) => {
   return { ...formState, updateForm, resetForm };
 };
 
-
 // Built in Hooks from redux toolkit
-type DispatchFunc = () => AppDispatch;
-export const useAppDispatch: DispatchFunc = useDispatch;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

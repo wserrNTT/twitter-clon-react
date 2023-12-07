@@ -16,6 +16,9 @@ import { useAppSelector, useAppDispatch } from '@/hooks';
 // Components
 import { Icon } from '@iconify/react';
 
+// Types
+import type { routeName } from '@/common/types';
+
 // Styles
 import '@/assets/Layout.scss';
 
@@ -28,8 +31,14 @@ const Layout: FC = () => {
 
   const navigate = useNavigate();
 
-  const [itemIndex, setItemIndex] = useState<number>(0);
+  const [route, setRoute] = useState<routeName>('home');
   const [showMenu, setShowMenu] = useState(false);
+
+  // Hides element in given routes
+  const hideIn = (routes: routeName[]) => !routes.includes(route as routeName);
+
+  // Shows element only in given routes
+  const showIn = (routes: routeName[]) => routes.includes(route as routeName);
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -47,56 +56,62 @@ const Layout: FC = () => {
           <Link to='/home' className='item home'>
             <Icon className='icon' icon='simple-icons:x' />
           </Link>
-          <Link to='/home' className='item' onClick={() => setItemIndex(0)}>
+          <Link to='/home' className='item' onClick={() => setRoute('home')}>
             <Icon
               className='icon'
               icon={
-                itemIndex === 0
+                showIn(['home'])
                   ? 'material-symbols:home'
                   : 'material-symbols:home-outline'
               }
             />
-            <p className={`text ${itemIndex === 0 && 'bold'}`}>Inicio</p>
+            <p className={`text ${showIn(['home']) && 'bold'}`}>Inicio</p>
           </Link>
-          <Link to='/explore' className='item' onClick={() => setItemIndex(1)}>
+          <Link to='/explore' className='item' onClick={() => setRoute('explore')}>
             <Icon
               className='icon'
-              icon={itemIndex === 1 ? 'iconamoon:search-bold' : 'iconamoon:search'}
+              icon={showIn(['explore']) ? 'iconamoon:search-bold' : 'iconamoon:search'}
             />
-            <p className={`text ${itemIndex === 1 && 'bold'}`}>Explorar</p>
+            <p className={`text ${showIn(['explore']) && 'bold'}`}>Explorar</p>
           </Link>
-          <Link to='/notifications' className='item' onClick={() => setItemIndex(2)}>
+          <Link
+            to='/notifications'
+            className='item'
+            onClick={() => setRoute('notifications')}
+          >
             <Icon
               className='icon'
-              icon={itemIndex === 2 ? 'ph:bell-fill' : 'ph:bell-light'}
+              icon={showIn(['notifications']) ? 'ph:bell-fill' : 'ph:bell-light'}
             />
-            <p className={`text ${itemIndex === 2 && 'bold'}`}>Notificaciones</p>
+            <p className={`text ${showIn(['notifications']) && 'bold'}`}>
+              Notificaciones
+            </p>
           </Link>
-          <Link to='/messages' className='item' onClick={() => setItemIndex(3)}>
+          <Link to='/messages' className='item' onClick={() => setRoute('messages')}>
             <Icon
               className='icon'
               icon={
-                itemIndex === 3
+                showIn(['messages'])
                   ? 'teenyicons:envelope-solid'
                   : 'teenyicons:envelope-outline'
               }
             />
-            <p className={`text ${itemIndex === 3 && 'bold'}`}>Mensajes</p>
+            <p className={`text ${showIn(['messages']) && 'bold'}`}>Mensajes</p>
           </Link>
           <Link
             to={`/${loginStore.data?.userName}/lists`}
             className='item'
-            onClick={() => setItemIndex(4)}
+            onClick={() => setRoute('lists')}
           >
             <Icon
               className='icon'
               icon={
-                itemIndex === 4
+                showIn(['lists'])
                   ? 'fluent:document-one-page-24-filled'
                   : 'fluent:document-one-page-24-regular'
               }
             />
-            <p className={`text ${itemIndex === 4 && 'bold'}`}>Listas</p>
+            <p className={`text ${showIn(['lists']) && 'bold'}`}>Listas</p>
           </Link>
           <div className='item'>
             <Icon className='icon' icon='simple-icons:x' />
@@ -105,13 +120,13 @@ const Layout: FC = () => {
           <Link
             to={`/${loginStore.data?.userName}`}
             className='item'
-            onClick={() => setItemIndex(5)}
+            onClick={() => setRoute('profile')}
           >
             <Icon
               className='icon'
-              icon={itemIndex === 5 ? 'heroicons:user-solid' : 'heroicons:user'}
+              icon={showIn(['profile']) ? 'heroicons:user-solid' : 'heroicons:user'}
             />
-            <p className={`text ${itemIndex === 5 && 'bold'}`}>Perfil</p>
+            <p className={`text ${showIn(['profile']) && 'bold'}`}>Perfil</p>
           </Link>
           <div className='item'>
             <Icon className='icon' icon='tabler:dots-circle-horizontal' />
@@ -142,17 +157,19 @@ const Layout: FC = () => {
         </div>
       </aside>
       <Outlet />
-      {itemIndex !== 3 && (
+      {route !== 'messages' && (
         // Prevent rendering on Messages Page
         <aside className='right-sidebar'>
-          <div className='search-container'>
-            <div className='search'>
-              <Icon className='icon' icon='iconamoon:search' />
-              <input className='input-search' type='text' placeholder='Buscar' />
+          {hideIn(['explore']) && (
+            <div className='search-container'>
+              <div className='search'>
+                <Icon className='icon' icon='iconamoon:search' />
+                <input className='input-search' type='text' placeholder='Buscar' />
+              </div>
             </div>
-          </div>
+          )}
           <div className='sidebar-items'>
-            {itemIndex === 0 && (
+            {showIn(['home']) && (
               <div className='premium'>
                 <p className='title'>Suscríbete a Premium</p>
                 <p className='body'>
@@ -164,7 +181,7 @@ const Layout: FC = () => {
                 </button>
               </div>
             )}
-            {[0, 2, 4, 5].includes(itemIndex) && (
+            {hideIn(['explore']) && (
               <div className='trends'>
                 <p className='title'>Tendencias para ti</p>
 
@@ -184,27 +201,25 @@ const Layout: FC = () => {
                 ))}
               </div>
             )}
-            {[0, 1, 2, 4, 5].includes(itemIndex) && (
-              <div className='follow'>
-                <p className='title'>
-                  {itemIndex === 5 ? 'Tal vez te guste' : 'A quién seguir'}
-                </p>
-                {randomUsers.map((user) => (
-                  <div className='user' key={user.userName}>
-                    <img
-                      className='profile-picture'
-                      src={user.profilePicture}
-                      alt={user.displayName}
-                    />
-                    <div className='info'>
-                      <p className='display-name'>{user.displayName}</p>
-                      <p className='user-name'>@{user.userName}</p>
-                    </div>
-                    <button className='follow-button'>Seguir</button>
+            <div className='follow'>
+              <p className='title'>
+                {route === 'profile' ? 'Tal vez te guste' : 'A quién seguir'}
+              </p>
+              {randomUsers.map((user) => (
+                <div className='user' key={user.userName}>
+                  <img
+                    className='profile-picture'
+                    src={user.profilePicture}
+                    alt={user.displayName}
+                  />
+                  <div className='info'>
+                    <p className='display-name'>{user.displayName}</p>
+                    <p className='user-name'>@{user.userName}</p>
                   </div>
-                ))}
-              </div>
-            )}
+                  <button className='follow-button'>Seguir</button>
+                </div>
+              ))}
+            </div>
             <div className='footer'>
               <a className='link' href='https://twitter.com/tos'>
                 Condiciones de Servicio

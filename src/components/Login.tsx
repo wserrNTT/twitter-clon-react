@@ -97,7 +97,7 @@ const Login: FC<modalProps> = ({ setShow: showModal }) => {
             </button>
             <button type='button' className='empty-button'>
               <Icon className='icon' icon='bi:apple' />
-              <p >Iniciar sesión con Apple</p>
+              <p>Iniciar sesión con Apple</p>
             </button>
             <div className='separator'>
               <span className='line'></span>

@@ -1,5 +1,5 @@
 // React
-import type{ FC } from 'react';
+import type { FC } from 'react';
 
 // Redux
 import { useSelector } from 'react-redux';
@@ -10,8 +10,8 @@ import { useTitle } from '@/hooks';
 
 const Lists: FC = () => {
   const userData = useSelector((state: RootState) => state.login.data);
-  useTitle(`Listas creadas por ${userData?.username} /X`);
-  return <div>{userData?.displayname}'s lists</div>;
+  useTitle(`Listas creadas por ${userData?.userName} /X`);
+  return <div>{userData?.displayName}'s lists</div>;
 };
 
 export default Lists;

@@ -8,16 +8,12 @@ import { shuffleArray } from '@/utils';
 import type { IUser } from '@/common/types';
 import { RootState } from '@/store';
 
-export const fetchUsers = createAsyncThunk(
-  'users/fetchUsers',
-  async (payload, { rejectWithValue }) => {
-    const { data, status } = await getUsers();
-    if (status !== 200) return rejectWithValue(status);
-    return data;
-  }
-);
+export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
+  const { data } = await getUsers();
+  return data;
+});
 
-interface usersData {
+interface usersState {
   users: IUser[];
   status: 'IDLE' | 'LOADING' | 'SUCCEEDED' | 'FAILED';
   error: string;
@@ -29,7 +25,7 @@ const userSlice = createSlice({
     users: [],
     status: 'IDLE',
     error: ''
-  } as usersData,
+  } as usersState,
   reducers: {},
   extraReducers: (builder) => {
     builder
