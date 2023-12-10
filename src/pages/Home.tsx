@@ -12,7 +12,7 @@ import { useTitle, useAppSelector, useAppDispatch } from '@/hooks';
 import { postTweet } from '@/utils/axios';
 // Types
 import type { FC, ChangeEvent, FormEvent } from 'react';
-import type { pageProps } from '@/common/types';
+import type { ITweet, IUser, pageProps, rawTweet } from '@/common/types';
 
 // Components
 import { Icon } from '@iconify/react';
@@ -40,20 +40,33 @@ const Home: FC<pageProps> = ({ title }) => {
   const loginStore = useAppSelector(selectLoginStore);
 
   const tweetStore = useAppSelector(selectTweetStore);
+  const [tweets, setTweets] = useState<ITweet[]>(tweetStore.tweets);
 
   const dispatch = useAppDispatch();
 
   const handlePost = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setNewPost({ ...newPost, loading: true });
+    const newTweet = {
+      author: loginStore.data._id,
+      body: newPost.body,
+      timeStamp: new Date().toString()
+    } as rawTweet;
     try {
-      await postTweet({
-        author: loginStore.data._id,
-        body: newPost.body,
-        timeStamp: new Date().toString()
-      });
+      await postTweet(newTweet);
+      setTweets([
+        {
+          _id: '0',
+          ...newTweet,
+          author: loginStore.data,
+          comments: [] as ITweet[],
+          likes: [] as IUser[],
+          reposts: [] as IUser[],
+          views: [] as IUser[]
+        },
+        ...tweets
+      ]);
       setNewPost({ body: '', loading: false, error: '' });
-      dispatch(fetchTweets());
     } catch (error) {
       setNewPost({
         body: '',
@@ -67,9 +80,11 @@ const Home: FC<pageProps> = ({ title }) => {
     const { value } = event.target as HTMLInputElement;
     setNewPost({ ...newPost, body: value });
   };
+
   useEffect(() => {
     dispatch(fetchTweets());
   }, []);
+
   return (
     <div className='home-container'>
       <div className='tabs'>
@@ -97,29 +112,21 @@ const Home: FC<pageProps> = ({ title }) => {
           />
         </div>
         <form className='input-container' onSubmit={handlePost}>
-          {newPost.loading ? (
-            <div className='loader-container'>
-              <Loader />
-            </div>
-          ) : (
-            <>
-              <input
-                className='new-tweet'
-                type='text'
-                placeholder='¡¿Qué está pasando?!'
-                onChange={handleChange}
-              />
-              <div className='options'>
-                <button
-                  type='submit'
-                  className={`post-button ${newPost.body.length === 0 && 'disabled'}`}
-                  disabled={newPost.body.length === 0}
-                >
-                  Postear
-                </button>
-              </div>
-            </>
-          )}
+          <input
+            className='new-tweet'
+            type='text'
+            placeholder='¡¿Qué está pasando?!'
+            onChange={handleChange}
+          />
+          <div className='options'>
+            <button
+              type='submit'
+              className={`post-button ${newPost.body.length === 0 && 'disabled'}`}
+              disabled={newPost.body.length === 0}
+            >
+              Postear
+            </button>
+          </div>
         </form>
       </div>
       <div className='tweets-container'>
@@ -128,7 +135,7 @@ const Home: FC<pageProps> = ({ title }) => {
             <Loader />
           </div>
         ) : (
-          tweetStore.tweets.map((tweet) => <Tweet tweet={tweet} key={tweet._id} />)
+          tweets.map((tweet) => <Tweet tweet={tweet} key={tweet._id} />)
         )}
       </div>
     </div>
