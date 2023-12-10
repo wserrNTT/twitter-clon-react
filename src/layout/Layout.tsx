@@ -45,10 +45,6 @@ const Layout: FC = () => {
     dispatch(fetchHashtags());
   }, []);
 
-  useEffect(() => {
-    if (!loginStore.isLoggedIn) navigate('/');
-  }, [loginStore.isLoggedIn, navigate]);
-
   return (
     <div className='layout-container'>
       <aside className='main-sidebar'>

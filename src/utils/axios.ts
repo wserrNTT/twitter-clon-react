@@ -22,6 +22,10 @@ export const getTweets = async (): Promise<AxiosResponse<ITweet[]>> =>
 export const getTweetById = async (id: string): Promise<AxiosResponse<ITweet>> =>
   await axiosTwitter.get(`/api/tweets/${id}`);
 
+// GET all tweets by user
+export const getTweetsByUser = async (id: string): Promise<AxiosResponse<ITweet>> =>
+  await axiosTwitter.get(`/api/users/${id}/tweets`);
+
 // POST new Tweet
 export const postTweet = async (newTweet: rawTweet) => {
   await axiosTwitter.post('/api/tweets', newTweet);

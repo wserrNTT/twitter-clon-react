@@ -1,12 +1,5 @@
 // React
-import { useState, useEffect } from 'react';
-
-// Redux
-import { useAppSelector } from '@/hooks';
-import { selectLoginStore } from '@/store/slices/login.store';
-
-// React-router
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 // Components
 import { Icon } from '@iconify/react';
@@ -24,15 +17,8 @@ import '@/assets/Register.scss';
 
 const Register: FC<pageProps> = ({ title }) => {
   const [showLogin, setShowLogin] = useState(false);
-  const navigate = useNavigate();
-  const { isLoggedIn } = useAppSelector(selectLoginStore);
-  
+
   useTitle(title);
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/home');
-    }
-  }, [isLoggedIn]);
 
   return (
     <>
