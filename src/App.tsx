@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, redirect } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Layout
 import Layout from '@/layout/Layout';
@@ -9,7 +9,7 @@ import Home from '@/pages/Home';
 import Explore from '@/pages/Explore';
 import Notifications from '@/pages/Notifications';
 import Messages from '@/pages/Messages';
-import Profile from '@/pages/Profile';
+import Profile from '@/pages/profile';
 import Lists from '@/pages/Lists';
 import Logout from '@/pages/Logout';
 
