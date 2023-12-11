@@ -11,6 +11,7 @@ import loginStore from '@/store/slices/login.store';
 import tweetStore from '@/store/slices/tweet.store';
 import userStore from '@/store/slices/user.store';
 import hashtagStore from '@/store/slices/hashtag.store';
+import routeStore from './slices/route.store';
 
 // Config
 const persistConfig = {
@@ -25,7 +26,8 @@ const reducer = persistReducer(
     login: loginStore,
     tweetStore: tweetStore,
     userStore: userStore,
-    hashtagStore: hashtagStore
+    hashtagStore: hashtagStore,
+    routeStore: routeStore
   })
 );
 

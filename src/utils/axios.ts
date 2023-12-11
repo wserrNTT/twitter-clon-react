@@ -14,6 +14,10 @@ export const getLoginUser = async (
 ): Promise<AxiosResponse<{ message?: string; user: IUser }>> =>
   await axiosTwitter.get(`/login?loginuser=${loginuser}&loginpassword=${loginpassword}`);
 
+// Make one user follow another user
+export const follow = async (followerID: string, followingID: string) =>
+  await axiosTwitter.patch(`/follow?followerid=${followerID}&followingid=${followingID}`);
+
 // GET all tweets
 export const getTweets = async (): Promise<AxiosResponse<ITweet[]>> =>
   await axiosTwitter.get('/api/tweets');
@@ -23,8 +27,10 @@ export const getTweetById = async (id: string): Promise<AxiosResponse<ITweet>> =
   await axiosTwitter.get(`/api/tweets/${id}`);
 
 // GET all tweets by user
-export const getTweetsByUser = async (id: string): Promise<AxiosResponse<ITweet>> =>
-  await axiosTwitter.get(`/api/users/${id}/tweets`);
+export const getTweetsByUser = async (
+  userIDs: string[]
+): Promise<AxiosResponse<ITweet[]>> =>
+  await axiosTwitter.get(`/api/tweets?users=${userIDs.join('+')}`);
 
 // POST new Tweet
 export const postTweet = async (newTweet: rawTweet) => {

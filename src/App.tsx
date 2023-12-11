@@ -24,7 +24,6 @@ const App = () => {
       <Routes>
         {loginStore.isLoggedIn ? (
           <>
-            <Route path='/logout' element={<Logout title='X' />} />
             <Route element={<Layout />}>
               <Route path='/' element={<Home title='Inicio /X' />} />
               <Route path='/home' element={<Home title='Inicio /X' />} />
@@ -37,6 +36,7 @@ const App = () => {
               <Route path='/:username' element={<Profile />} />
               <Route path='/:id/lists' element={<Lists />} />
             </Route>
+            <Route path='/logout' element={<Logout title='X' />} />
           </>
         ) : (
           <Route path='/*' element={<Register title='X. Es lo que está pasando /X' />} />

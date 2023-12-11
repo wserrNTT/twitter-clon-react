@@ -6,6 +6,7 @@ import { selectLoginStore } from '@/store/slices/login.store';
 
 import { selectRandomUsers, fetchUsers } from '@/store/slices/user.store';
 import { selectRandomHashtags, fetchHashtags } from '@/store/slices/hashtag.store';
+import { selectCurrentRoute, setCurrentRoute } from '@/store/slices/route.store';
 
 // React-router
 import { Outlet, useNavigate, Link } from 'react-router-dom';
@@ -31,14 +32,14 @@ const Layout: FC = () => {
 
   const navigate = useNavigate();
 
-  const [route, setRoute] = useState<routeName>('home');
+  const currentRoute = useAppSelector(selectCurrentRoute);
   const [showMenu, setShowMenu] = useState(false);
 
   // Hides element in given routes
-  const hideIn = (routes: routeName[]) => !routes.includes(route as routeName);
+  const hideIn = (routes: routeName[]) => !routes.includes(currentRoute);
 
   // Shows element only in given routes
-  const showIn = (routes: routeName[]) => routes.includes(route as routeName);
+  const showIn = (routes: routeName[]) => routes.includes(currentRoute);
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -52,7 +53,11 @@ const Layout: FC = () => {
           <Link to='/home' className='item home'>
             <Icon className='icon' icon='simple-icons:x' />
           </Link>
-          <Link to='/home' className='item' onClick={() => setRoute('home')}>
+          <Link
+            to='/home'
+            className='item'
+            onClick={() => dispatch(setCurrentRoute('home'))}
+          >
             <Icon
               className='icon'
               icon={
@@ -63,7 +68,11 @@ const Layout: FC = () => {
             />
             <p className={`text ${showIn(['home']) && 'bold'}`}>Inicio</p>
           </Link>
-          <Link to='/explore' className='item' onClick={() => setRoute('explore')}>
+          <Link
+            to='/explore'
+            className='item'
+            onClick={() => dispatch(setCurrentRoute('explore'))}
+          >
             <Icon
               className='icon'
               icon={showIn(['explore']) ? 'iconamoon:search-bold' : 'iconamoon:search'}
@@ -73,7 +82,7 @@ const Layout: FC = () => {
           <Link
             to='/notifications'
             className='item'
-            onClick={() => setRoute('notifications')}
+            onClick={() => dispatch(setCurrentRoute('notifications'))}
           >
             <Icon
               className='icon'
@@ -83,7 +92,11 @@ const Layout: FC = () => {
               Notificaciones
             </p>
           </Link>
-          <Link to='/messages' className='item' onClick={() => setRoute('messages')}>
+          <Link
+            to='/messages'
+            className='item'
+            onClick={() => dispatch(setCurrentRoute('messages'))}
+          >
             <Icon
               className='icon'
               icon={
@@ -97,7 +110,7 @@ const Layout: FC = () => {
           <Link
             to={`/${loginStore.data?.userName}/lists`}
             className='item'
-            onClick={() => setRoute('lists')}
+            onClick={() => dispatch(setCurrentRoute('lists'))}
           >
             <Icon
               className='icon'
@@ -116,7 +129,7 @@ const Layout: FC = () => {
           <Link
             to={`/${loginStore.data?.userName}`}
             className='item'
-            onClick={() => setRoute('profile')}
+            onClick={() => dispatch(setCurrentRoute('profile'))}
           >
             <Icon
               className='icon'
@@ -153,7 +166,7 @@ const Layout: FC = () => {
         </div>
       </aside>
       <Outlet />
-      {route !== 'messages' && (
+      {currentRoute !== 'messages' && (
         // Prevent rendering on Messages Page
         <aside className='right-sidebar'>
           {hideIn(['explore']) && (
@@ -199,7 +212,7 @@ const Layout: FC = () => {
             )}
             <div className='follow'>
               <p className='title'>
-                {route === 'profile' ? 'Tal vez te guste' : 'A quién seguir'}
+                {currentRoute === 'profile' ? 'Tal vez te guste' : 'A quién seguir'}
               </p>
               {randomUsers.map((user) => (
                 <div className='user' key={user.userName}>

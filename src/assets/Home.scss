@@ -32,17 +32,15 @@ $white: #e7e9ea;
         font-weight: bold;
       }
 
-      &-active {
-        .text::after {
-          content: '';
-          position: absolute;
-          height: 4px;
-          width: 100%;
-          bottom: 0;
-          left: 0;
-          border-radius: 4px;
-          background-color: $blueTwitter;
-        }
+      &-active .text::after {
+        content: '';
+        position: absolute;
+        height: 4px;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        border-radius: 4px;
+        background-color: $blueTwitter;
       }
 
       &:hover {
@@ -56,12 +54,14 @@ $white: #e7e9ea;
       align-items: center;
       font-size: 2rem;
       width: 60px;
+      cursor: pointer;
+      transition: background-color 0.3s;
 
       .icon {
+        position: relative;
         padding: 7.5px;
         box-sizing: content-box;
         border-radius: 50%;
-        cursor: pointer;
 
         &:hover {
           background-color: $grey;

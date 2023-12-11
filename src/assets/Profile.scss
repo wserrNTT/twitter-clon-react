@@ -1,0 +1,210 @@
+$lightGrey: #71767b;
+$grey: #313131;
+$darkGrey: #16181c;
+$white: #e7e9ea;
+
+$blueTwitter: #1b8bd6;
+
+.profile-container {
+  .title {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    height: 52px;
+    border-bottom: solid 1px $grey;
+    overflow: hidden;
+    z-index: 1;
+    .back-button {
+      margin-left: 20px;
+      width: 30px;
+      height: 30px;
+      padding: 4px;
+      font-size: 1.8rem;
+      box-sizing: content-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      transition: background-color ease-out 0.2s;
+      cursor: pointer;
+      z-index: 1;
+      &:hover {
+        background-color: $grey;
+      }
+    }
+
+    .data {
+      z-index: 1;
+
+      .display-name {
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+      .posts-amount {
+        font-size: 1.2rem;
+        color: $lightGrey;
+      }
+    }
+    &::before {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 100%;
+      background-color: rgba(black, 0.8);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      z-index: 0;
+    }
+  }
+  .header-container {
+    background-color: $blueTwitter;
+    height: 200px;
+  }
+  .profile-options {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    .profile-picture-container {
+      position: absolute;
+      left: 20px;
+      top: -80px;
+      width: 150px;
+      height: 150px;
+      padding: 5px;
+      background-color: #000000;
+      border-radius: 50%;
+      .profile-picture {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+    .edit-button {
+      padding: 10px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border: solid 1px $lightGrey;
+      color: $white;
+      border-radius: 32px;
+      background-color: transparent;
+      cursor: pointer;
+      transition: background-color ease-out 0.2s;
+      &:hover {
+        background-color: $darkGrey;
+      }
+    }
+    .follow-button {
+      padding: 10px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border: solid 1px $white;
+      color: #000000;
+      border-radius: 32px;
+      background-color: $white;
+      cursor: pointer;
+      transition: background-color ease-out 0.2s;
+      &:hover {
+        background-color: darken($white, 20%);
+        border: solid 1px darken($white, 20%);
+      }
+    }
+  }
+  .profile-data {
+    padding: 10px 20px;
+    .display-name {
+      font-size: 2.2rem;
+      font-weight: bold;
+    }
+    .user-name {
+      font-size: 1.8rem;
+      color: $lightGrey;
+    }
+    .follow-container {
+      display: flex;
+      column-gap: 10px;
+      padding: 10px 0;
+      font-size: 1.5rem;
+      color: $lightGrey;
+      .bold {
+        color: $white;
+        font-weight: bold;
+      }
+    }
+  }
+  .tabs {
+    position: sticky;
+    top: 0;
+    display: flex;
+    height: 52px;
+    border-bottom: solid 1px $grey;
+    overflow: hidden;
+
+    .tab {
+      position: relative;
+      flex: auto;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      .text {
+        position: relative;
+        padding: 0 5px;
+        display: flex;
+        align-items: center;
+        font-size: 1.6rem;
+        font-weight: bold;
+      }
+
+      &-active {
+        .text::after {
+          content: '';
+          position: absolute;
+          height: 4px;
+          width: 100%;
+          bottom: 0;
+          left: 0;
+          border-radius: 4px;
+          background-color: $blueTwitter;
+        }
+      }
+
+      &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        transition: background-color ease-out 0.2s;
+      }
+      &:hover::before {
+        background-color: $grey;
+      }
+    }
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 100%;
+      background-color: rgba(black, 0.8);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      z-index: 0;
+    }
+  }
+  .tweets-container {
+    display: flex;
+    flex-direction: column;
+
+    .loader-container {
+      display: flex;
+      justify-content: center;
+      margin: 10px;
+    }
+  }
+}

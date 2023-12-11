@@ -11,8 +11,8 @@ export interface IUser {
   userName: string;
   displayName: string;
   profilePicture: string;
-  following: IUser[];
-  followers: IUser[];
+  following: string[];
+  followers: string[];
 }
 
 export interface IHashtag {
