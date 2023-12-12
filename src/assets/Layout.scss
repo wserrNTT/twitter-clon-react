@@ -1,4 +1,6 @@
 @import '@/assets/mixins';
+
+$redTwitter: #d61b88;
 $blueTwitter: #1b8bd6;
 $darkBlueTwitter: #1685cf;
 
@@ -329,15 +331,31 @@ $white: #e7e9ea;
               color: $white;
             }
           }
-
-          .follow-button {
+          button {
             margin-left: auto;
-            background-color: $white;
-            color: $grey;
             padding: 5px 10px;
             font-size: 1.5rem;
             border: none;
+            border: solid 1px $white;
             border-radius: 32px;
+            cursor: pointer;
+          }
+          .follow-button {
+            background-color: $white;
+            color: $grey;
+            transition: background-color 0.2s;
+            &:hover {
+              background-color: darken($white, 10%);
+            }
+          }
+          .unfollow-button {
+            background-color: transparent;
+            color: $white;
+            transition: background-color 0.2s;
+            &:hover {
+              border: solid 1px $redTwitter;
+              background-color: darken($redTwitter, 40%);
+            }
           }
 
           &:hover {

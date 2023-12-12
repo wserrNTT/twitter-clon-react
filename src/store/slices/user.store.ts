@@ -1,8 +1,7 @@
-import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Utils
 import { getUsers } from '@/utils/axios';
-import { shuffleArray } from '@/utils';
 
 // Types
 import type { IUser } from '@/common/types';
@@ -46,7 +45,3 @@ const userSlice = createSlice({
 export default userSlice.reducer;
 
 export const selectUserStore = (state: RootState) => state.userStore;
-export const selectRandomUsers = createSelector(
-  (state: RootState) => state.userStore.users,
-  (users) => shuffleArray(users).slice(0, 3)
-);

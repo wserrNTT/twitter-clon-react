@@ -61,9 +61,11 @@ const Tweet: FC<{ tweet: ITweet }> = ({ tweet }) => {
           <div className='text'>
             {extractHashtags(tweet.body).map((word) =>
               word.startsWith('#') ? (
-                <Link to={`/hashtag/${word.split('#')[1]}`}>{word}</Link>
+                <Link to={`/hashtag/${word.split('#')[1]}`} key={word}>
+                  {word}
+                </Link>
               ) : (
-                <p>{word}</p>
+                <p key={word}>{word}</p>
               )
             )}
           </div>

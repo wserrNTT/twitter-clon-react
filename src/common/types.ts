@@ -17,7 +17,7 @@ export interface IUser {
 
 export interface IHashtag {
   name: string;
-  tweet_volume?: ITweet[];
+  tweet_volume?: string[];
 }
 
 export interface ITweet {

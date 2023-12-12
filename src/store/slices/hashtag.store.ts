@@ -1,8 +1,7 @@
-import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Utils
 import { getHashtags } from '@/utils/axios';
-import { shuffleArray } from '@/utils';
 
 // Types
 import type { IHashtag } from '@/common/types';
@@ -46,7 +45,3 @@ const hashtagSlice = createSlice({
 export default hashtagSlice.reducer;
 
 export const selectHashtagStore = (state: RootState) => state.hashtagStore;
-export const selectRandomHashtags = createSelector(
-  (state: RootState) => state.hashtagStore.hashtags,
-  (hashtags) => shuffleArray(hashtags).slice(0, 5)
-);

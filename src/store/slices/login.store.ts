@@ -35,11 +35,14 @@ export const loginSlice = createSlice({
       state.data = defaultUser;
       state.isLoggedIn = false;
       state.error = '';
+    },
+    updateFollowing: (state: ILogin, action: PayloadAction<string[]>) => {
+      state.data.following = action.payload;
     }
   }
 });
 
-export const { login, logout, setError } = loginSlice.actions;
+export const { login, logout, setError, updateFollowing } = loginSlice.actions;
 
 export default loginSlice.reducer;
 

@@ -15,6 +15,8 @@ import { useAppSelector } from '@/hooks';
 import type { FC } from 'react';
 import type { IUser } from '@/common/types';
 
+// Styles
+import '@/assets/Profile.scss';
 export interface profileProps {
   profile: IUser;
 }
@@ -25,7 +27,6 @@ const Profile: FC = () => {
   const loginStore = useAppSelector(selectLoginStore);
 
   const profileUser = userStore.users.find((user) => user.userName === username);
-
   return !profileUser ? (
     <EmptyProfile /> // Renders if user does not exists
   ) : username === loginStore.data.userName ? (

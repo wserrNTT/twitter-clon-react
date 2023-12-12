@@ -2,10 +2,10 @@
 import { FC, useEffect, useState } from 'react';
 
 // Redux
-import { selectLoginStore } from '@/store/slices/login.store';
+import { selectLoginStore, updateFollowing } from '@/store/slices/login.store';
 
-import { selectRandomUsers, fetchUsers } from '@/store/slices/user.store';
-import { selectRandomHashtags, fetchHashtags } from '@/store/slices/hashtag.store';
+import { selectUserStore, fetchUsers } from '@/store/slices/user.store';
+import { selectHashtagStore, fetchHashtags } from '@/store/slices/hashtag.store';
 import { selectCurrentRoute, setCurrentRoute } from '@/store/slices/route.store';
 
 // React-router
@@ -17,6 +17,9 @@ import { useAppSelector, useAppDispatch } from '@/hooks';
 // Components
 import { Icon } from '@iconify/react';
 
+// Utils
+import { follow, unfollow } from '@/utils/axios';
+
 // Types
 import type { routeName } from '@/common/types';
 
@@ -26,8 +29,8 @@ import '@/assets/Layout.scss';
 const Layout: FC = () => {
   const loginStore = useAppSelector(selectLoginStore);
 
-  const randomHashtags = useAppSelector(selectRandomHashtags);
-  const randomUsers = useAppSelector(selectRandomUsers);
+  const userStore = useAppSelector(selectUserStore);
+  const hashtagStore = useAppSelector(selectHashtagStore);
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
@@ -40,6 +43,25 @@ const Layout: FC = () => {
 
   // Shows element only in given routes
   const showIn = (routes: routeName[]) => routes.includes(currentRoute);
+
+  const handleFollow = async (profileID: string) => {
+    try {
+      const { data } = await follow(loginStore.data._id, profileID);
+      dispatch(fetchUsers());
+      dispatch(updateFollowing(data));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const handleUnfollow = async (profileID: string) => {
+    try {
+      const { data } = await unfollow(loginStore.data._id, profileID);
+      dispatch(fetchUsers());
+      dispatch(updateFollowing(data));
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -194,8 +216,12 @@ const Layout: FC = () => {
               <div className='trends'>
                 <p className='title'>Tendencias para ti</p>
 
-                {randomHashtags.map((hashtag) => (
-                  <div className='trend' key={hashtag.name}>
+                {hashtagStore.hashtags.map((hashtag) => (
+                  <div
+                    className='trend'
+                    key={hashtag.name}
+                    onClick={() => navigate(`/hashtag/${hashtag.name}`)}
+                  >
                     <div className='info'>
                       <p className='header'>Tendencia</p>
                       <p className='name'>#{hashtag.name}</p>
@@ -214,18 +240,32 @@ const Layout: FC = () => {
               <p className='title'>
                 {currentRoute === 'profile' ? 'Tal vez te guste' : 'A quién seguir'}
               </p>
-              {randomUsers.map((user) => (
+              {userStore.users.map((user) => (
                 <div className='user' key={user.userName}>
                   <img
                     className='profile-picture'
                     src={user.profilePicture}
                     alt={user.displayName}
                   />
-                  <div className='info'>
+                  <div className='info' onClick={() => navigate(`/${user.userName}`)}>
                     <p className='display-name'>{user.displayName}</p>
                     <p className='user-name'>@{user.userName}</p>
                   </div>
-                  <button className='follow-button'>Seguir</button>
+                  {loginStore.data.following.includes(user._id) ? (
+                    <button
+                      className='unfollow-button'
+                      onClick={() => handleUnfollow(user._id)}
+                    >
+                      Siguiendo
+                    </button>
+                  ) : (
+                    <button
+                      className='follow-button'
+                      onClick={() => handleFollow(user._id)}
+                    >
+                      Seguir
+                    </button>
+                  )}
                 </div>
               ))}
             </div>

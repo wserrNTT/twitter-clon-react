@@ -12,12 +12,11 @@ import { useTitle, useAppSelector, useAppDispatch } from '@/hooks';
 import { postTweet } from '@/utils/axios';
 // Types
 import type { FC, ChangeEvent, FormEvent } from 'react';
-import type { ITweet, IUser, pageProps, rawTweet } from '@/common/types';
+import type { pageProps, rawTweet } from '@/common/types';
 
 // Components
 import { Icon } from '@iconify/react';
 import Tweet from '@/components/Tweet';
-import Loader from '@/components/Loader';
 
 // Styles
 import '@/assets/Home.scss';
@@ -40,13 +39,11 @@ const Home: FC<pageProps> = ({ title }) => {
   const loginStore = useAppSelector(selectLoginStore);
 
   const tweetStore = useAppSelector(selectTweetStore);
-  const [tweets, setTweets] = useState<ITweet[]>(tweetStore.tweets);
 
   const dispatch = useAppDispatch();
 
   const handlePost = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setNewPost({ ...newPost, loading: true });
     const newTweet = {
       author: loginStore.data._id,
       body: newPost.body,
@@ -54,19 +51,8 @@ const Home: FC<pageProps> = ({ title }) => {
     } as rawTweet;
     try {
       await postTweet(newTweet);
-      setTweets([
-        {
-          _id: '0',
-          ...newTweet,
-          author: loginStore.data,
-          comments: [] as ITweet[],
-          likes: [] as IUser[],
-          reposts: [] as IUser[],
-          views: [] as IUser[]
-        },
-        ...tweets
-      ]);
       setNewPost({ body: '', loading: false, error: '' });
+      dispatch(fetchTweets());
     } catch (error) {
       setNewPost({
         body: '',
@@ -116,6 +102,7 @@ const Home: FC<pageProps> = ({ title }) => {
             className='new-tweet'
             type='text'
             placeholder='¡¿Qué está pasando?!'
+            value={newPost.body}
             onChange={handleChange}
           />
           <div className='options'>
@@ -130,13 +117,11 @@ const Home: FC<pageProps> = ({ title }) => {
         </form>
       </div>
       <div className='tweets-container'>
-        {tweetStore.status === 'LOADING' ? (
-          <div className='loader-container'>
-            <Loader />
-          </div>
-        ) : (
-          tweets.map((tweet) => <Tweet tweet={tweet} key={tweet._id} />)
-        )}
+        {currentTab === 'forYou'
+          ? tweetStore.tweets.map((tweet) => <Tweet tweet={tweet} key={tweet._id} />)
+          : tweetStore.tweets
+              .filter((tweet) => loginStore.data.following.includes(tweet.author._id))
+              .map((tweet) => <Tweet tweet={tweet} key={tweet._id} />)}
       </div>
     </div>
   );

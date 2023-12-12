@@ -1,8 +1,10 @@
 // Redux
 import { useAppSelector } from '@/hooks';
 import { selectHashtagStore } from '@/store/slices/hashtag.store';
+
 // Hooks
 import { useTitle } from '@/hooks';
+import { useNavigate } from 'react-router-dom';
 
 // Components
 import { Icon } from '@iconify/react';
@@ -15,7 +17,7 @@ import type { pageProps } from '@/common/types';
 import '@/assets/Explore.scss';
 const Explore: FC<pageProps> = ({ title }) => {
   useTitle(title);
-
+  const navigate = useNavigate();
   const hashtagStore = useAppSelector(selectHashtagStore);
   return (
     <div className='explore-container'>
@@ -28,7 +30,11 @@ const Explore: FC<pageProps> = ({ title }) => {
       <div className='trends'>
         <p className='title'>Tendencias para ti</p>
         {hashtagStore.hashtags.map((hashtag) => (
-          <div className='trend'>
+          <div
+            className='trend'
+            onClick={() => navigate(`/hashtag/${hashtag.name}`)}
+            key={hashtag.name}
+          >
             <div className='info'>
               <p className='header'>Tendencia</p>
               <p className='name'>{hashtag.name}</p>

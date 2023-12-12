@@ -1,6 +1,7 @@
 // Hooks
 import { useState, useEffect } from 'react';
 import { useTitle } from '@/hooks';
+import { useNavigate } from 'react-router-dom';
 
 //Components
 import { Icon } from '@iconify/react';
@@ -12,16 +13,15 @@ import type { FC } from 'react';
 import type { profileProps } from '.';
 import type { ITweet } from '@/common/types';
 
-
 // Utils
 import { getTweetsByUser } from '@/utils/axios';
 
 // Assets
-import '@/assets/Profile.scss';
 import defaultProfile from '@/assets/img/default_profile.png';
 
 const LoginProfile: FC<profileProps> = ({ profile }) => {
   useTitle(`${profile.displayName} (@${profile.userName}) /X`);
+  const navigate = useNavigate();
   const [profileTweets, setProfileTweets] = useState<{
     tweets: ITweet[];
     loading: boolean;
@@ -41,7 +41,7 @@ const LoginProfile: FC<profileProps> = ({ profile }) => {
   return (
     <div className='profile-container'>
       <div className='title'>
-        <div className='back-button'>
+        <div className='back-button' onClick={() => navigate(-1)}>
           <Icon className='icon' icon='fa6-solid:arrow-left' />
         </div>
         <div className='data'>

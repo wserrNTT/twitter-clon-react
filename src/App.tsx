@@ -11,6 +11,7 @@ import Notifications from '@/pages/Notifications';
 import Messages from '@/pages/Messages';
 import Profile from '@/pages/profile';
 import Lists from '@/pages/Lists';
+import Hashtag from './pages/Hashtag';
 import Logout from '@/pages/Logout';
 
 // Redux
@@ -35,6 +36,7 @@ const App = () => {
               <Route path='/messages' element={<Messages title='Mensajes /X' />} />
               <Route path='/:username' element={<Profile />} />
               <Route path='/:id/lists' element={<Lists />} />
+              <Route path='/hashtag/:hashtagName' element={<Hashtag />} />
             </Route>
             <Route path='/logout' element={<Logout title='X' />} />
           </>

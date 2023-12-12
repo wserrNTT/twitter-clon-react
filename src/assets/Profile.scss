@@ -63,6 +63,10 @@ $redTwitter: #d61b88;
     background-color: $blueTwitter;
     height: 200px;
   }
+  .empty-header-container {
+    background-color: #333639;
+    height: 200px;
+  }
   .profile-options {
     position: relative;
     display: flex;
@@ -83,7 +87,15 @@ $redTwitter: #d61b88;
         object-fit: cover;
         border-radius: 50%;
       }
+      .empty-profile-picture {
+        background-color: #16181c;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
     }
+
     button {
       padding: 10px;
       font-size: 1.5rem;
@@ -147,6 +159,26 @@ $redTwitter: #d61b88;
         color: $white;
         font-weight: bold;
       }
+    }
+  }
+  .empty-data {
+    padding: 50px 20px;
+    .display-name {
+      font-size: 2.2rem;
+      font-weight: bold;
+    }
+  }
+  .empty-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .heading {
+      font-size: 3.5rem;
+      font-weight: bold;
+    }
+    .subheading {
+      font-size: 1.8rem;
+      color: $lightGrey;
     }
   }
   .tabs {

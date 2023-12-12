@@ -1,9 +1,10 @@
 // Hooks
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTitle, useAppSelector, useAppDispatch } from '@/hooks';
 
 // Redux
-import { selectLoginStore } from '@/store/slices/login.store';
+import { selectLoginStore, updateFollowing } from '@/store/slices/login.store';
 import { fetchUsers } from '@/store/slices/user.store';
 
 //Components
@@ -20,7 +21,6 @@ import type { ITweet } from '@/common/types';
 import { follow, unfollow, getTweetsByUser } from '@/utils/axios';
 
 // Assets
-import '@/assets/Profile.scss';
 import defaultProfile from '@/assets/img/default_profile.png';
 
 const DefaultProfile: FC<profileProps> = ({ profile }) => {
@@ -37,6 +37,7 @@ const DefaultProfile: FC<profileProps> = ({ profile }) => {
   const [buttonHover, setButtonHover] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const fetchTweets = async (userIDs: string[]) => {
     setProfileTweets({ ...profileTweets, loading: true });
@@ -46,28 +47,30 @@ const DefaultProfile: FC<profileProps> = ({ profile }) => {
 
   const handleFollow = async () => {
     try {
-      await follow(loginStore.data._id, profile._id);
+      const { data } = await follow(loginStore.data._id, profile._id);
       dispatch(fetchUsers());
+      dispatch(updateFollowing(data));
     } catch (error) {
       console.error(error);
     }
   };
   const handleUnfollow = async () => {
     try {
-      await unfollow(loginStore.data._id, profile._id);
+      const { data } = await unfollow(loginStore.data._id, profile._id);
       dispatch(fetchUsers());
+      dispatch(updateFollowing(data));
     } catch (error) {
       console.error(error);
     }
   };
   useEffect(() => {
     fetchTweets([profile._id]);
-  }, []);
+  }, [profile]);
 
   return (
     <div className='profile-container'>
       <div className='title'>
-        <div className='back-button'>
+        <div className='back-button' onClick={() => navigate(-1)}>
           <Icon className='icon' icon='fa6-solid:arrow-left' />
         </div>
         <div className='data'>
