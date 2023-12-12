@@ -48,7 +48,18 @@ $white: #e7e9ea;
       flex-direction: column;
       gap: 10px;
       font-size: 1.6rem;
-
+      .text {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        a {
+          color: $blueTwitter;
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
       .picture {
         width: 100%;
         height: auto;

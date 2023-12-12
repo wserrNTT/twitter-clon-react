@@ -1,5 +1,6 @@
 // Components
 import { Icon } from '@iconify/react';
+import { Link } from 'react-router-dom';
 
 // Types
 import type { ITweet } from '@/common/types';
@@ -8,23 +9,37 @@ import type { FC } from 'react';
 // Styles
 import '@/assets/Tweet.scss';
 
-const Tweet: FC<{ tweet: ITweet }> = ({ tweet }) => {
-  // Formats timestamp
-  const formatDate = (date: string) => {
-    const dateConverted = new Date(date);
-    const currentTime = new Date().valueOf();
-    const seconds = (currentTime - dateConverted.valueOf()) / 1000;
-    // format in case of seconds
-    if (seconds <= 60) return `${Math.floor(seconds)}s`;
-    // format in case of minutes
-    if (seconds <= 3600) return `${Math.floor(seconds / 60)}m`;
-    // format in case of hours
-    if (seconds <= 86400) return `${Math.floor(seconds / 3600)}h`;
-    return dateConverted
-      .toLocaleString('default', { day: '2-digit', month: 'short' })
-      .replace('-', ' ');
-  };
+const extractHashtags = (text: string) => {
+  const result = [];
+  let newString = '';
 
+  for (const word of text.split(' ')) {
+    if (word.startsWith('#')) {
+      result.push(newString.trim());
+      newString = '';
+      result.push(word);
+    } else {
+      newString = `${newString} ${word}`;
+    }
+  }
+  return result.length === 0 ? [newString.trim()] : result;
+};
+// Formats timestamp
+const formatDate = (date: string) => {
+  const dateConverted = new Date(date);
+  const currentTime = new Date().valueOf();
+  const seconds = (currentTime - dateConverted.valueOf()) / 1000;
+  // format in case of seconds
+  if (seconds <= 60) return `${Math.floor(seconds)}s`;
+  // format in case of minutes
+  if (seconds <= 3600) return `${Math.floor(seconds / 60)}m`;
+  // format in case of hours
+  if (seconds <= 86400) return `${Math.floor(seconds / 3600)}h`;
+  return dateConverted
+    .toLocaleString('default', { day: '2-digit', month: 'short' })
+    .replace('-', ' ');
+};
+const Tweet: FC<{ tweet: ITweet }> = ({ tweet }) => {
   return (
     <div className='tweet'>
       <div className='profile-container'>
@@ -43,7 +58,15 @@ const Tweet: FC<{ tweet: ITweet }> = ({ tweet }) => {
           </div>
         </div>
         <div className='tweet-body'>
-          {tweet.body}
+          <div className='text'>
+            {extractHashtags(tweet.body).map((word) =>
+              word.startsWith('#') ? (
+                <Link to={`/hashtag/${word.split('#')[1]}`}>{word}</Link>
+              ) : (
+                <p>{word}</p>
+              )
+            )}
+          </div>
           {tweet.picture && <img className='picture' src={tweet.picture} alt='' />}
         </div>
         <div className='interactions'>

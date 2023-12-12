@@ -198,7 +198,7 @@ const Layout: FC = () => {
                   <div className='trend' key={hashtag.name}>
                     <div className='info'>
                       <p className='header'>Tendencia</p>
-                      <p className='name'>{hashtag.name}</p>
+                      <p className='name'>#{hashtag.name}</p>
                       <p className='volume' v-if='trend.tweet_volume'>
                         {hashtag.tweet_volume?.length} posts
                       </p>
