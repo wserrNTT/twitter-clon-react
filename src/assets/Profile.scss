@@ -4,6 +4,7 @@ $darkGrey: #16181c;
 $white: #e7e9ea;
 
 $blueTwitter: #1b8bd6;
+$redTwitter: #d61b88;
 
 .profile-container {
   .title {
@@ -83,13 +84,16 @@ $blueTwitter: #1b8bd6;
         border-radius: 50%;
       }
     }
-    .edit-button {
+    button {
       padding: 10px;
       font-size: 1.5rem;
       font-weight: bold;
+      border-radius: 32px;
+      border: none;
+    }
+    .edit-button {
       border: solid 1px $lightGrey;
       color: $white;
-      border-radius: 32px;
       background-color: transparent;
       cursor: pointer;
       transition: background-color ease-out 0.2s;
@@ -98,9 +102,7 @@ $blueTwitter: #1b8bd6;
       }
     }
     .follow-button {
-      padding: 10px;
-      font-size: 1.5rem;
-      font-weight: bold;
+      padding: 10px 20px;
       border: solid 1px $white;
       color: #000000;
       border-radius: 32px;
@@ -110,6 +112,18 @@ $blueTwitter: #1b8bd6;
       &:hover {
         background-color: darken($white, 20%);
         border: solid 1px darken($white, 20%);
+      }
+    }
+    .unfollow-button {
+      width: 150px;
+      border: solid 1px $lightGrey;
+      color: $white;
+      background-color: transparent;
+      cursor: pointer;
+      transition: background-color ease-out 0.2s;
+      &:hover {
+        border: solid 1px $redTwitter;
+        background-color: #240617;
       }
     }
   }

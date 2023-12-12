@@ -1,9 +1,10 @@
 // Hooks
 import { useState, useEffect } from 'react';
-import { useTitle, useAppSelector } from '@/hooks';
+import { useTitle, useAppSelector, useAppDispatch } from '@/hooks';
 
 // Redux
 import { selectLoginStore } from '@/store/slices/login.store';
+import { fetchUsers } from '@/store/slices/user.store';
 
 //Components
 import { Icon } from '@iconify/react';
@@ -16,7 +17,7 @@ import type { profileProps } from '.';
 import type { ITweet } from '@/common/types';
 
 // Utils
-import { follow, getTweetsByUser } from '@/utils/axios';
+import { follow, unfollow, getTweetsByUser } from '@/utils/axios';
 
 // Assets
 import '@/assets/Profile.scss';
@@ -33,6 +34,9 @@ const DefaultProfile: FC<profileProps> = ({ profile }) => {
   }>({ tweets: [], loading: false });
 
   const [currentTab, setCurrentTab] = useState<string>('posts');
+  const [buttonHover, setButtonHover] = useState<boolean>(false);
+
+  const dispatch = useAppDispatch();
 
   const fetchTweets = async (userIDs: string[]) => {
     setProfileTweets({ ...profileTweets, loading: true });
@@ -43,11 +47,19 @@ const DefaultProfile: FC<profileProps> = ({ profile }) => {
   const handleFollow = async () => {
     try {
       await follow(loginStore.data._id, profile._id);
+      dispatch(fetchUsers());
     } catch (error) {
       console.error(error);
     }
   };
-
+  const handleUnfollow = async () => {
+    try {
+      await unfollow(loginStore.data._id, profile._id);
+      dispatch(fetchUsers());
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
     fetchTweets([profile._id]);
   }, []);
@@ -72,11 +84,21 @@ const DefaultProfile: FC<profileProps> = ({ profile }) => {
             className='profile-picture'
           />
         </div>
-        <button type='button' className='follow-button' onClick={handleFollow}>
-          {profile.followers.includes(loginStore.data._id)
-            ? 'Dejar de seguir'
-            : 'Seguir'}
-        </button>
+        {profile.followers.includes(loginStore.data._id) ? (
+          <button
+            type='button'
+            className='unfollow-button'
+            onClick={handleUnfollow}
+            onMouseEnter={() => setButtonHover(true)}
+            onMouseLeave={() => setButtonHover(false)}
+          >
+            {buttonHover ? 'Dejar de seguir' : 'Siguiendo'}
+          </button>
+        ) : (
+          <button type='button' className='follow-button' onClick={handleFollow}>
+            Seguir
+          </button>
+        )}
       </div>
       <div className='profile-data'>
         <p className='display-name'>{profile.displayName}</p>

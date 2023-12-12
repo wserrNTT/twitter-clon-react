@@ -18,6 +18,10 @@ export const getLoginUser = async (
 export const follow = async (followerID: string, followingID: string) =>
   await axiosTwitter.patch(`/follow?followerid=${followerID}&followingid=${followingID}`);
 
+// Make one user stop following another user
+export const unfollow = async (followerID: string, followingID: string) =>
+  await axiosTwitter.patch(`/unfollow?followerid=${followerID}&followingid=${followingID}`);
+
 // GET all tweets
 export const getTweets = async (): Promise<AxiosResponse<ITweet[]>> =>
   await axiosTwitter.get('/api/tweets');
