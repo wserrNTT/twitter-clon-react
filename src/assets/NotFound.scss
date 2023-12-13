@@ -1,0 +1,42 @@
+$lightGrey: #71767b;
+$grey: #313131;
+
+.notfound-container {
+  .title {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    height: 52px;
+    overflow: hidden;
+    z-index: 1;
+    .back-button {
+      margin-left: 20px;
+      width: 30px;
+      height: 30px;
+      padding: 4px;
+      font-size: 1.8rem;
+      box-sizing: content-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      transition: background-color ease-out 0.2s;
+      cursor: pointer;
+      z-index: 1;
+      &:hover {
+        background-color: $grey;
+      }
+    }
+  }
+  .message {
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+    .text {
+      font-size: 1.5rem;
+      color: $lightGrey;
+    }
+  }
+}

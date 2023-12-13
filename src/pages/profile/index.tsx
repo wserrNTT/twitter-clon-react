@@ -22,14 +22,14 @@ export interface profileProps {
 }
 
 const Profile: FC = () => {
-  const { username } = useParams();
+  const params = useParams();
   const userStore = useAppSelector(selectUserStore);
   const loginStore = useAppSelector(selectLoginStore);
 
-  const profileUser = userStore.users.find((user) => user.userName === username);
+  const profileUser = userStore.users.find((user) => user.userName === params.username);
   return !profileUser ? (
     <EmptyProfile /> // Renders if user does not exists
-  ) : username === loginStore.data.userName ? (
+  ) : params.username === loginStore.data.userName ? (
     <LoginProfile profile={profileUser} /> // Renders if user is logged
   ) : (
     <DefaultProfile profile={profileUser} /> // Renders any user

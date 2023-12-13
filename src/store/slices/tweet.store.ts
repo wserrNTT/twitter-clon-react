@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
 
 // Utils
 import { getTweets } from '@/utils/axios';
@@ -44,3 +44,10 @@ const tweetSlice = createSlice({
 export default tweetSlice.reducer;
 
 export const selectTweetStore = (state: RootState) => state.tweetStore;
+export const selectTweetID = (tweetID: string | undefined) =>
+  createSelector(
+    (state: RootState) => state.tweetStore.tweets,
+    (tweets) => {
+      return tweetID ? tweets.find((tweet) => tweet._id === tweetID) : undefined;
+    }
+  );
