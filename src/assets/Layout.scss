@@ -294,6 +294,20 @@ $white: #e7e9ea;
             border-radius: 0 0 16px 16px;
           }
         }
+        .show-more {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 12px 20px;
+          border-radius: 0 0 16px 16px;
+          font-size: 1.6rem;
+          color: $blueTwitter;
+          transition: background-color ease-in 0.2s;
+          cursor: pointer;
+          &:hover {
+            background-color: $grey;
+          }
+        }
       }
 
       .follow {
@@ -364,6 +378,20 @@ $white: #e7e9ea;
 
           &:last-child {
             border-radius: 0 0 16px 16px;
+          }
+        }
+        .show-more {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 12px 20px;
+          border-radius: 0 0 16px 16px;
+          font-size: 1.6rem;
+          color: $blueTwitter;
+          transition: background-color ease-in 0.2s;
+          cursor: pointer;
+          &:hover {
+            background-color: $grey;
           }
         }
       }

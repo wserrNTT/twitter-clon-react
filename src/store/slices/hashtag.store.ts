@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
 
 // Utils
 import { getHashtags } from '@/utils/axios';
@@ -45,3 +45,9 @@ const hashtagSlice = createSlice({
 export default hashtagSlice.reducer;
 
 export const selectHashtagStore = (state: RootState) => state.hashtagStore;
+
+export const selectLastHashtags = createSelector(
+  (state: RootState) => state.hashtagStore.hashtags,
+  (hashtags) => hashtags.slice(0, 5)
+);
+

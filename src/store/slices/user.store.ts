@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
 
 // Utils
 import { getUsers } from '@/utils/axios';
@@ -45,3 +45,9 @@ const userSlice = createSlice({
 export default userSlice.reducer;
 
 export const selectUserStore = (state: RootState) => state.userStore;
+
+export const selectLastUsers = createSelector(
+  (state: RootState) => state.userStore.users,
+  (users) => users.slice(0, 5)
+);
+

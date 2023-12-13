@@ -4,8 +4,8 @@ import { FC, useEffect, useState } from 'react';
 // Redux
 import { selectLoginStore, updateFollowing } from '@/store/slices/login.store';
 
-import { selectUserStore, fetchUsers } from '@/store/slices/user.store';
-import { selectHashtagStore, fetchHashtags } from '@/store/slices/hashtag.store';
+import { selectLastUsers, fetchUsers } from '@/store/slices/user.store';
+import { selectLastHashtags, fetchHashtags } from '@/store/slices/hashtag.store';
 import { selectCurrentRoute, setCurrentRoute } from '@/store/slices/route.store';
 
 // React-router
@@ -29,14 +29,18 @@ import '@/assets/Layout.scss';
 const Layout: FC = () => {
   const loginStore = useAppSelector(selectLoginStore);
 
-  const userStore = useAppSelector(selectUserStore);
-  const hashtagStore = useAppSelector(selectHashtagStore);
+  const users = useAppSelector(selectLastUsers);
+  const hashtags = useAppSelector(selectLastHashtags);
   const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
   const currentRoute = useAppSelector(selectCurrentRoute);
-  const [showMenu, setShowMenu] = useState(false);
+  const [show, setShow] = useState({
+    menu: false,
+    hashtags: false,
+    users: false
+  });
 
   // Hides element in given routes
   const hideIn = (routes: routeName[]) => !routes.includes(currentRoute);
@@ -168,14 +172,17 @@ const Layout: FC = () => {
             <p className='text'>Postear</p>
           </div>
         </div>
-        <div className={`user ${!showMenu && 'hover'}`} onClick={() => setShowMenu(true)}>
+        <div
+          className={`user ${!show.menu && 'hover'}`}
+          onClick={() => setShow({ ...show, menu: true })}
+        >
           <img src={loginStore.data?.profilePicture} alt='' className='user-pfp' />
           <div className='user-info'>
             <span className='display-name'> {loginStore.data?.displayName} </span>
             <span className='user-name'>@{loginStore.data?.userName}</span>
           </div>
           <Icon icon='mi:options-horizontal' className='icon' />
-          {showMenu && (
+          {show.menu && (
             <div className='submenu'>
               <div className='items'>
                 <p className='item'>Agregar una cuenta existente</p>
@@ -215,8 +222,8 @@ const Layout: FC = () => {
             {hideIn(['explore']) && (
               <div className='trends'>
                 <p className='title'>Tendencias para ti</p>
-
-                {hashtagStore.hashtags.map((hashtag) => (
+                {/* Shows only 3 hashtags unless show More is clicked */}
+                {(show.hashtags ? hashtags : hashtags.slice(0, 3)).map((hashtag) => (
                   <div
                     className='trend'
                     key={hashtag.name}
@@ -234,13 +241,22 @@ const Layout: FC = () => {
                     </div>
                   </div>
                 ))}
+                {!show.hashtags && (
+                  <div
+                    className='show-more'
+                    onClick={() => setShow({ ...show, hashtags: true })}
+                  >
+                    <div className='text'>Mostrar más</div>
+                  </div>
+                )}
               </div>
             )}
             <div className='follow'>
               <p className='title'>
                 {currentRoute === 'profile' ? 'Tal vez te guste' : 'A quién seguir'}
               </p>
-              {userStore.users.map((user) => (
+              {/* Shows only 3 users unless show More is clicked */}
+              {(show.users ? users : users.slice(0, 3)).map((user) => (
                 <div className='user' key={user.userName}>
                   <img
                     className='profile-picture'
@@ -268,6 +284,14 @@ const Layout: FC = () => {
                   )}
                 </div>
               ))}
+              {!show.users && (
+                <div
+                  className='show-more'
+                  onClick={() => setShow({ ...show, users: true })}
+                >
+                  <div className='text'>Mostrar más</div>
+                </div>
+              )}
             </div>
             <div className='footer'>
               <a className='link' href='https://twitter.com/tos'>
@@ -294,9 +318,15 @@ const Layout: FC = () => {
           </div>
         </aside>
       )}
-      {showMenu && <div className='background' onClick={() => setShowMenu(false)}></div>}
+      {show.menu && (
+        <div
+          className='background'
+          onClick={() => setShow({ ...show, menu: true })}
+        ></div>
+      )}
     </div>
   );
 };
 
 export default Layout;
+
