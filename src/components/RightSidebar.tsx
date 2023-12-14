@@ -23,6 +23,7 @@ const RightSidebar = () => {
   const dispatch = useAppDispatch();
 
   const loginStore = useAppSelector(selectLoginStore);
+  const isFollowing = (userId: string) => loginStore.data.following.includes(userId);
 
   const users = useAppSelector(selectLastUsers);
   const hashtags = useAppSelector(selectLastHashtags);
@@ -30,24 +31,19 @@ const RightSidebar = () => {
 
   const navigate = useNavigate();
 
-  const handleFollow = async (profileID: string) => {
+  const toggleFollow = async (profileID: string, isFollowing: boolean) => {
     try {
-      const { data } = await follow(loginStore.data._id, profileID);
+      const { data } = isFollowing
+        ? await unfollow(loginStore.data._id, profileID)
+        : await follow(loginStore.data._id, profileID);
+        
       dispatch(fetchUsers());
       dispatch(updateFollowing(data));
     } catch (error) {
       console.error(error);
     }
   };
-  const handleUnfollow = async (profileID: string) => {
-    try {
-      const { data } = await unfollow(loginStore.data._id, profileID);
-      dispatch(fetchUsers());
-      dispatch(updateFollowing(data));
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
   useEffect(() => {
     dispatch(fetchUsers());
     dispatch(fetchHashtags());
@@ -123,18 +119,12 @@ const RightSidebar = () => {
                 <p className='display-name'>{user.displayName}</p>
                 <p className='user-name'>@{user.userName}</p>
               </div>
-              {loginStore.data.following.includes(user._id) ? (
-                <button
-                  className='unfollow-button'
-                  onClick={() => handleUnfollow(user._id)}
-                >
-                  Siguiendo
-                </button>
-              ) : (
-                <button className='follow-button' onClick={() => handleFollow(user._id)}>
-                  Seguir
-                </button>
-              )}
+              <button
+                className={isFollowing(user._id) ? 'unfollow-button' : 'follow-button'}
+                onClick={() => toggleFollow(user._id, isFollowing(user._id))}
+              >
+                {isFollowing(user._id) ? 'Siguiendo' : 'Seguir'}
+              </button>
             </div>
           ))}
           {!show.users && (

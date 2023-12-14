@@ -27,6 +27,7 @@ const DefaultProfile: FC<profileProps> = ({ profile }) => {
   useTitle(`${profile.displayName} (@${profile.userName}) /X`);
 
   const loginStore = useAppSelector(selectLoginStore);
+  const isFollowing = loginStore.data.following.includes(profile._id);
 
   const [profileTweets, setProfileTweets] = useState<{
     tweets: ITweet[];
@@ -45,18 +46,12 @@ const DefaultProfile: FC<profileProps> = ({ profile }) => {
     setProfileTweets({ tweets: data, loading: false });
   };
 
-  const handleFollow = async () => {
+  const toggleFollow = async (isFollowing: boolean) => {
     try {
-      const { data } = await follow(loginStore.data._id, profile._id);
-      dispatch(fetchUsers());
-      dispatch(updateFollowing(data));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const handleUnfollow = async () => {
-    try {
-      const { data } = await unfollow(loginStore.data._id, profile._id);
+      const { data } = isFollowing
+        ? await unfollow(loginStore.data._id, profile._id)
+        : await follow(loginStore.data._id, profile._id);
+
       dispatch(fetchUsers());
       dispatch(updateFollowing(data));
     } catch (error) {
@@ -87,21 +82,15 @@ const DefaultProfile: FC<profileProps> = ({ profile }) => {
             className='profile-picture'
           />
         </div>
-        {profile.followers.includes(loginStore.data._id) ? (
-          <button
-            type='button'
-            className='unfollow-button'
-            onClick={handleUnfollow}
-            onMouseEnter={() => setButtonHover(true)}
-            onMouseLeave={() => setButtonHover(false)}
-          >
-            {buttonHover ? 'Dejar de seguir' : 'Siguiendo'}
-          </button>
-        ) : (
-          <button type='button' className='follow-button' onClick={handleFollow}>
-            Seguir
-          </button>
-        )}
+        <button
+          type='button'
+          className={isFollowing ? 'unfollow-button' : 'follow-button'}
+          onClick={() => toggleFollow(isFollowing)}
+          onMouseEnter={() => setButtonHover(true)}
+          onMouseLeave={() => setButtonHover(false)}
+        >
+          {!isFollowing ? 'Seguir' : buttonHover ? 'Dejar de seguir' : 'Siguiendo'}
+        </button>
       </div>
       <div className='profile-data'>
         <p className='display-name'>{profile.displayName}</p>
