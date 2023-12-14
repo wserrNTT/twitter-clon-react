@@ -1,3 +1,6 @@
+// Types
+import { routeName } from '@/common/types';
+
 // Formats timestamp
 export const formatDate = (date: string) => {
   const dateConverted = new Date(date);
@@ -29,3 +32,11 @@ export const extractHashtags = (text: string) => {
   }
   return result.length === 0 ? [newString.trim()] : result;
 };
+
+// Hides element in given routes
+export const hideIn = (routes: routeName[], currentRoute: routeName) =>
+  !routes.includes(currentRoute);
+
+// Shows element only in given routes
+export const showIn = (routes: routeName[], currentRoute: routeName) =>
+  routes.includes(currentRoute);
